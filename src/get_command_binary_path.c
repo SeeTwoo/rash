@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         :::     ::::::::   */
+/*   get_command_binary_path.c                           :+:     :+:    :+:   */
+/*                                                     +:+ +:+        +:+     */
+/*   By: walter </var/spool/mail/walter>             +#+  +:+       +#+       */
+/*                                                 +#+#+#+#+#+   +#+          */
+/*   Created:                                           #+#    #+#            */
+/*   Uptated:                                          ###   ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include "nodes.h"
+
+static void	build_temp_path(char temp[4096], char *path, char *name) {
+	strcpy(temp, path);
+	strcpy(&temp[strlen(path)], "/");
+	strcpy(&temp[strlen(path) + 1], name);
+}
+
+static int	find_command_full_path(char **paths, char *name, char temp[4096]) {
+	int	i;
+
+	i = 0;
+	while (paths[i]) {
+		build_temp_path(temp, paths[i], name);
+		if (access(temp, X_OK) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	get_command_binary_path(t_node *node, char **paths) {
+	char	temp[4096];
+	char	*command_path;
+
+	if (access(node->command[0], X_OK) == 0)
+		return ;
+	if (find_command_full_path(paths, node->command[0], temp) == 1)
+		return ;
+	command_path = strdup(temp);
+	if (!command_path)
+		return ;
+	free(node->command[0]);
+	node->command[0] = command_path;
+	return ;
+}
