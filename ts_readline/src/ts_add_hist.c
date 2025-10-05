@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         :::     ::::::::   */
-/*   ts_readline.c                                       :+:     :+:    :+:   */
+/*   ts_add_hist.c                                       :+:     :+:    :+:   */
 /*                                                     +:+ +:+        +:+     */
 /*   By: seetwoo <marvin@42students.fr>              +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
@@ -10,39 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include <stdio.h>
 
 #include "ts_readline.h"
 
-static void	replace_line(char line_buffer[1024], t_ts_hist *history, char cmd) {
-	t_ts_hist
+t_ts_hist	*new_hist_node(char *line, t_ts_hist *prev) {
+	t_ts_hist	*new;
+
+	new = malloc(sizeof(t_ts_hist));
+	if (!new)
+		return (NULL);
+	new->prev = prev;
+	new->next = NULL;
+	new->line = strdup(line);
+	if (!new->line)
+		return (free(new), NULL);
+	return (new);
 }
 
-static void	arrow_handling(char line_buffer[1024], t_ts_hist *history) {
-	char	cmd_buf[3] = "\0\0\0";
-	char	cmd;
-
-	read(0, cmd_buf[3], 3);
-	cmd = cmd_buf[2];
-	if (stncmp("[[", command_buffer, 2) != 0 || 
-			(cmd != 'A' && cmd != 'B' && cmd != 'C' && cmd != 'D'))
-		return ;
-	if (cmd == 'A' || cmd == 'B')
-		replace_line(line_buffer, history, cmd);
-}
-
-char	*ts_readline(char *prompt, t_ts_hist *history) {
-	size_t	bytes_read;
-	char	line_buffer[1024];
-	char	command_buffer[64];
-	char	read_buffer[1];
-
-	write(1, prompt, strlen(prompt));
-	while (1) {
-		read(0, read_buffer, 1);
-		if (read_buffer[0] == '^')
-			arrow_handling(line_buffer, history)
+int	ts_add_hist(char *line, t_ts_hist *history) {
+	if (!history) {
+		history = new_hist_node(line, NULL);
+		if (!history)
+			dprintf(2, "Couldn't add the line [ %s ] to the history, malloc failed\n", line);
+		return (0);
 	}
-	return (strdup(line_buffer));
+	while (history->next)
+		history = history->next
+	history->next = new_hist_node(line, history);
+	if (!history->next)
+		dprintf(2, "Couldn't add the line [ %s ] to the history, malloc failed\n", line);
+	return (0);
 }
