@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         :::     ::::::::   */
-/*   ts_readline.h                                       :+:     :+:    :+:   */
+/*   raw_mode_handling.c                                 :+:     :+:    :+:   */
 /*                                                     +:+ +:+        +:+     */
-/*   By: seetwoo <marvin@42students.fr>              +#+  +:+       +#+       */
+/*   By: walter </var/spool/mail/walter>             +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created:                                           #+#    #+#            */
 /*   Uptated:                                          ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TS_READLINE_H
-# define TS_READLINE_H
+#include <termios.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct termios		t_settings;
-typedef struct s_ts_hist	t_ts_hist;
+#include "ts_readline.h"
 
-struct s_ts_hist {
-	t_ts_hist	*prev;
-	t_ts_hist	*next;
-	char		*line;
-};
+void	disable_raw_mode(t_settings *original) {
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, original);
+}
 
-char	*ts_readline(char *prompt, t_ts_hist *history);
-int		ts_add_hist(char *line, t_ts_hist *history);
-void	ts_free_hist(t_ts_hist *history);
+void	enable_raw_mode(t_settings *original) {
+	t_settings	raw;
 
-#endif
+	tcgetattr(STDIN_FILENO, original);
+	raw = *original;
+	raw.c_lflag &= ~(ECHO | ICANON | ISIG);
+	raw.c_iflag &= ~(ICRNL | IXON);
+	raw.c_oflag &= ~(OPOST);
+	raw.c_cflag |= (CS8);
+	raw.c_cc[VMIN] = 0;
+	raw.c_cc[VTIME] = 1;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	*ts_readline(char *prompt);
+#include "includes/ts_readline.h"
 
 #ifndef PROMPT
 # define PROMPT "type something asshole >"
@@ -10,7 +10,7 @@ char	*ts_readline(char *prompt);
 int	main(void) {
 	char	*line;
 
-	line = ts_readline(PROMPT);
+	line = ts_readline(PROMPT, NULL);
 	if (!line)
 		return (1);
 	printf("%s\n", line);

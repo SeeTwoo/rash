@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "ts_readline.h"
 
-void	free_history(t_ts_hist *history) {
+void	ts_free_hist(t_ts_hist *history) {
 	t_ts_hist	*temp;
 
 	while (history) {
