@@ -14,6 +14,8 @@
 
 int		init_env(t_env *env, char **arg_env);
 void	main_loop(t_env *env);
+void	free_double_array(char**);
+void	free_kv_list(t_kv_list*);
 
 int	main(int ac, char **av, char **arg_env) {
 	t_env			env;
@@ -26,7 +28,8 @@ int	main(int ac, char **av, char **arg_env) {
 		return (1);
 	if (init_env(&env, arg_env) != 0)
 		return (1);
-
 	main_loop(&env);
+	free_double_array(env.paths);
+	free_kv_list(env.aliases);
 	return (0);
 }

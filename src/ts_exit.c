@@ -16,12 +16,7 @@
 #include "env.h"
 #include "nodes.h"
 
-void	free_node_array(t_node **nodes);
-void	free_double_array(char **array);
-
-int	ts_exit(t_node *node, t_node **nodes, t_env *env) {
-	(void)node;
-	free_node_array(nodes);
-	free_double_array(env->paths);
-	exit(EXIT_SUCCESS);
+int	ts_exit(t_env *env) {
+	env->should_exit = true;
+	return (0);
 }

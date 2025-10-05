@@ -24,6 +24,7 @@ char	*ts_readline(char *prompt);
 # define PROMPT "\x1b[1;36m\x1b[?2004ltrain> \x1b[0m"
 #endif
 
+char	*aliasing(char *line, t_kv_list *aliases);
 void	free_node_array(t_node **nodes);
 t_node	**parse_line(char *line);
 int		exec(t_node **nodes, t_env *env);
@@ -33,9 +34,11 @@ int	main_loop(t_env *env) {
 	t_node	**nodes;
 	char	*line;
 
-	(void)env;
-	while (1) {
+	while (!env->should_exit) {
 		line = ts_readline(PROMPT);
+		if (!line)
+			return (1);
+		line = aliasing(line, env->aliases);
 		if (!line)
 			return (1);
 		nodes = parse_line(line);

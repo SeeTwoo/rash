@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         :::     ::::::::   */
-/*   heredoc.c                                           :+:     :+:    :+:   */
+/*   aliases.h                                           :+:     :+:    :+:   */
 /*                                                     +:+ +:+        +:+     */
-/*   By: walter </var/spool/mail/walter>             +#+  +:+       +#+       */
+/*   By: seetwoo <marvin@42students.fr>              +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created:                                           #+#    #+#            */
 /*   Uptated:                                          ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#ifndef KV_LIST_H 
+# define KV_LIST_H
 
-char	*ts_readline(char *prompt);
+typedef struct s_kv_list	t_kv_list;
 
-int	heredoc(char *limiter) {
-	int		fds[2];
-	char	*line = NULL;
+struct s_kv_list {
+	char		*raw;
+	char		*key;
+	char		*value;
+	t_kv_list	*next;
+};
 
-	pipe(fds);
-	do {
-		free(line);
-		line = ts_readline("> ");
-		if (!line)
-			return (fds[0]);
-		dprintf(fds[1], "%s", line);
-		dprintf(fds[1], "\n");
-	} while (strcmp(line, limiter) != 0);
-	return (fds[0]);
-}
+#endif

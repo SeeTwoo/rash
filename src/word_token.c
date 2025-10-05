@@ -17,7 +17,7 @@
 #include "token.h"
 #include "token_and_node_types.h"
 
-int	isseparator(char c) {
+static int	isseparator(char c) {
 	return (
 		c == '<' ||
 		c == '>' ||
@@ -25,12 +25,30 @@ int	isseparator(char c) {
 	);
 }
 
-size_t	tok_len(char **line) {
+static int	quote_to_quote_len(char *line) {
+	int		i = 0;
+	char	quote = line[0];
+
+	i++;
+	while (line[i] && line[i] != quote)
+		i++;
+	if (line[i] == quote)
+		i++;
+	return (i);
+}
+
+static size_t	tok_len(char **line) {
 	size_t	i;
 	
 	i = 0;
-	while ((*line)[i] && !isspace((*line)[i]) && !isseparator((*line)[i]))
-		i++;
+	while (1) {
+		if (!(*line)[i] || isspace((*line)[i]) || isseparator((*line)[i]))
+			break ;
+		else if ((*line)[i] == '\'' || (*line)[i] == '\"')
+			i += quote_to_quote_len(&(*line)[i]);
+		else
+			i++;
+	}
 	(*line) += i;
 	return (i);
 }

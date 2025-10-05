@@ -3,7 +3,8 @@ CC = cc -Wall -Wextra -Werror -Iincludes
 CCDEBUG = $(CC) -g3 -O0
 
 SRC_DIR = src
-SRC_FILES = builtin_handling.c \
+SRC_FILES = aliasing.c \
+			builtin_handling.c \
 			cleaning.c \
 			exec.c \
 			get_command_binary_path.c \
@@ -19,11 +20,13 @@ SRC_FILES = builtin_handling.c \
 			parser.c \
 			parsing.c \
 			print_nodes.c \
+			quote_trim.c \
 			separator_token.c \
 			set_token_types.c \
 			setup_redirections.c \
 			syntax.c \
 			tok_to_args.c \
+			ts_alias.c \
 			ts_cd.c \
 			ts_echo.c \
 			ts_exit.c \

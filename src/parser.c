@@ -47,6 +47,7 @@ static t_node	*new_node(t_token **tok_array) {
 	if (get_redirections(new, tok_array) == 1)
 		return (free_double_array(new->command), free(new), NULL);
 	new->type = CMD;
+	new->pid = -1;
 	return (new);
 }
 

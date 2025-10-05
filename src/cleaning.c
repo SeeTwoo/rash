@@ -14,9 +14,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "env.h"
 #include "nodes.h"
 #include "token.h"
 #include "redirections.h"
+
+void	free_kv_list(t_kv_list *list) {
+	t_kv_list	*temp;
+
+	while (list) {
+		temp = list;
+		list = list->next;
+		free(temp->raw);
+		free(temp->key);
+		free(temp->value);
+		free(temp);
+	}
+}
 
 void	close_all_fds(int *fds, int command_number) {
 	for (int i = 0; i < command_number; i++) {

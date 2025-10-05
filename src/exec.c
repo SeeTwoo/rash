@@ -20,14 +20,15 @@
 #include "env.h"
 #include "nodes.h"
 
-void	get_command_binary_path(t_node *node, char **paths);
 void	close_every_fd(void);
-int		is_builtin(char *name);
-void	exec_builtin(t_node *node, t_node **nodes, t_env *env);
+void	exec_builtin(t_node *node, t_env *env);
 void	free_double_array(char **array);
 void	free_node_array(t_node **nodes);
-int		setup_redirections(t_node *command);
+void	get_command_binary_path(t_node *node, char **paths);
+int		is_builtin(char *name);
 void	print_nodes(t_node **nodes);
+int		setup_redirections(t_node *command);
+int		trim_command(t_node *node);
 
 //protection of the pipe creation
 static int	get_fds(t_node **nodes, int command_number) {
@@ -48,6 +49,7 @@ static int	get_fds(t_node **nodes, int command_number) {
 static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 	char	**cmd_args;
 
+	trim_command(command);
 	get_command_binary_path(command, env->paths);
 	setup_redirections(command); //check for success later
 	cmd_args = command->command;
@@ -72,7 +74,7 @@ int	exec(t_node **nodes, t_env *env) {
 	get_fds(nodes, command_number);
 	for (int i = 0; i < command_number; i++) {
 		if (is_builtin(nodes[i]->command[0])) {
-			exec_builtin(nodes[i], nodes, env);
+			exec_builtin(nodes[i], env);
 			continue ;
 		}
 		nodes[i]->pid = fork();
