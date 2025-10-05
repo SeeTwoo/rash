@@ -17,6 +17,7 @@
 #include "nodes.h"
 
 int	setup_redirections(t_node *node);
+int	trim_command(t_node *node);
 int	ts_alias(t_node *node, t_env *env);
 int	ts_cd(t_node *node);
 int	ts_exit(t_env *env);
@@ -38,6 +39,7 @@ void	exec_builtin(t_node *node, t_env *env) {
 	int	saved_stdin = dup(STDIN_FILENO);
 	int	saved_stdout = dup(STDOUT_FILENO);
 
+	trim_command(node);
 	setup_redirections(node);
 	if (strcmp(node->command[0], "exit") == 0)
 		ts_exit(env);

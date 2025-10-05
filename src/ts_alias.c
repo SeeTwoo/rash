@@ -52,7 +52,6 @@ static t_kv_list	*new_kv_node(char *new_kv) {
 	t_kv_list	*new;
 	size_t		len;
 
-	printf("\x1b[31mhello, adding a new alias node\n\x1b[0m");
 	new = malloc(sizeof(t_kv_list));
 	if (!new)
 		return (NULL);
