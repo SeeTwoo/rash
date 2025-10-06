@@ -29,23 +29,25 @@ void	disable_raw_mode(t_settings *original);
 static void	replace_line(t_rl *rl, t_ts_hist **history, char cmd) {
 	int	temp;
 
-	if (!(*history))
+	if (*history == NULL)
 		return ;
-	printf("cmd is : %c\n", cmd);
 	if (cmd == 'A' && (*history)->prev)
 		*history = (*history)->prev;
-	else if ((*history)->next)
+	else if (cmd == 'B' && (*history)->next)
 		*history = (*history)->next;
 	else
+		return ;
+	if (!(*history)->line)
 		return ;
 	temp = rl->i;
 	while (temp > 0) {
 		write(2, "\x1b[D", 3);
 		temp--;
 	}
-	write(2, "\x1b[K", 3);
-	memset(rl->line, '\0', rl->len + 1);
+	dprintf(2, "\x1b[%ldP", strlen(rl->line));
 	memcpy(rl->line, (*history)->line, strlen((*history)->line) + 1);
+	rl->len = strlen((*history)->line);
+	rl->i = rl->len;
 	write(2, rl->line, strlen(rl->line));
 }
 
@@ -83,10 +85,7 @@ static void	arrow_handling(t_rl *rl, t_ts_hist **history) {
 	char	cmd_buf[32];
 	char	cmd;
 
-	(void)history;
 	fill_command(cmd_buf, &cmd);
-	if (cmd != 'A' && cmd != 'B' && cmd != 'C' && cmd != 'D')
-		return ;
 	if (cmd == 'A' || cmd == 'B')
 		replace_line(rl, history, cmd);
 	else if (cmd == 'C')
@@ -115,11 +114,11 @@ static void	fill_line(t_rl *rl, char c) {
 }
 
 static void	backspace_handling(t_rl *rl) {
-	if (rl->i == 0)
+	if (rl->i <= 0)
 		return ;
+	rl->i--;
 	rl->line[rl->i] = '\0';
-	rl->i++;
-	rl->len++;
+	rl->len--;
 	write(2, "\x08\x1b[K", 4);
 }
 

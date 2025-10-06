@@ -16,9 +16,9 @@
 typedef struct s_rl	t_rl;
 
 struct s_rl {
-	char		line[1024];
-	int			i;
-	int			len;
+	char	line[1024];
+	int		i;
+	int		len;
 };
 
 #endif

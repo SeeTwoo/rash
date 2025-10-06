@@ -35,5 +35,7 @@ int	ts_add_hist(char *line, t_ts_hist *history) {
 	history->prev = new_hist_node(line, history->prev, history);
 	if (!history->prev)
 		dprintf(2, "Couldn't add the line [ %s ] to the history, malloc failed\n", line);
+	if (history->prev->prev)
+		history->prev->prev->next = history->prev;
 	return (0);
 }

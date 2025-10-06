@@ -25,7 +25,7 @@ int	main(void) {
 
 	history = ts_init_hist();
 	while (1) {
-		line = ts_readline(PROMPT, NULL);
+		line = ts_readline(PROMPT, history);
 		if (!line)
 			return (1);
 		if (strcmp(line, "exit") == 0)

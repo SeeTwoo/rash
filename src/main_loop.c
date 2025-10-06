@@ -18,7 +18,7 @@
 #include "nodes.h"
 #include "env.h"
 
-char	*ts_readline(char *prompt);
+#include "ts_readline.h"
 
 #ifndef PROMPT
 # define PROMPT "\x1b[1;36m\x1b[?2004ltrain> \x1b[0m"
@@ -31,13 +31,16 @@ int		exec(t_node **nodes, t_env *env);
 void	print_nodes(t_node **array);
 
 int	main_loop(t_env *env) {
-	t_node	**nodes;
-	char	*line;
+	t_ts_hist	*history;
+	t_node		**nodes;
+	char		*line;
 
+	history = ts_init_hist();
 	while (!env->should_exit) {
-		line = ts_readline(PROMPT);
+		line = ts_readline(PROMPT, history);
 		if (!line)
 			return (1);
+		ts_add_hist(line, history);
 		line = aliasing(line, env->aliases);
 		if (!line)
 			return (1);
@@ -49,5 +52,6 @@ int	main_loop(t_env *env) {
 		exec(nodes, env);
 		free_node_array(nodes);
 	}
+	ts_free_hist(history);
 	return (0);
 }
