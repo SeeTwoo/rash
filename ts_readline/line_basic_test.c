@@ -4,7 +4,7 @@
 #include "includes/ts_readline.h"
 
 #ifndef PROMPT
-# define PROMPT "type something asshole >"
+# define PROMPT "type something asshole > "
 #endif
 
 int	main(void) {
