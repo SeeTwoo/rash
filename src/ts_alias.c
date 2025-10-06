@@ -67,12 +67,12 @@ int	ts_alias(t_node *node, t_env *env) {
 	t_kv_list	*current;
 
 	if (!node->command[1])
-		return (display_aliases(env->aliases), 1);
+		return (display_aliases(env->aliases), 0);
 	if (!strchr(node->command[1], '='))
 		return (1);
 	current = env->aliases;
 	while (current) {
-		if (strcmp(node->command[1], current->key) == '=') {
+		if (strncmp(current->key, node->command[1], strlen(current->key)) == 0) {
 			set_value(current, node->command[1]);
 			return (0);
 		}

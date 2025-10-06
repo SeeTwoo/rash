@@ -54,14 +54,13 @@ static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 	setup_redirections(command); //check for success later
 	cmd_args = command->command;
 	command->command = NULL;
-	//print_nodes(nodes);
-	//dup2(command->in, STDIN_FILENO);
-	//dup2(command->out, STDOUT_FILENO);
 	free_node_array(nodes);
 	free_double_array(env->paths);
+	ts_free_hist(env->history);
 	close_every_fd();
 	execve(cmd_args[0], cmd_args, env->env);
-	printf("command not found\n");
+	dprintf(2, "%s : command not found\n", cmd_args[0]);
+	free_double_array(cmd_args);
 	exit(EXIT_FAILURE);
 }
 

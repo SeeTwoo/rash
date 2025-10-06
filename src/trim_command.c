@@ -57,7 +57,7 @@ void	no_quote_fill(char *dest, char *src) {
 char	*trim_string(char *s) {
 	char	*dest;
 
-	dest = malloc(sizeof(char) * no_quote_size(s));
+	dest = malloc(sizeof(char) * (no_quote_size(s) + 1));
 	if (!dest)
 		return (NULL);
 	no_quote_fill(dest, s);

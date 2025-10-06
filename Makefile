@@ -20,12 +20,12 @@ SRC_FILES = aliasing.c \
 			parser.c \
 			parsing.c \
 			print_nodes.c \
-			quote_trim.c \
 			separator_token.c \
 			set_token_types.c \
 			setup_redirections.c \
 			syntax.c \
 			tok_to_args.c \
+			trim_command.c \
 			ts_alias.c \
 			ts_cd.c \
 			ts_echo.c \

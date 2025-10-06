@@ -31,16 +31,15 @@ int		exec(t_node **nodes, t_env *env);
 void	print_nodes(t_node **array);
 
 int	main_loop(t_env *env) {
-	t_ts_hist	*history;
 	t_node		**nodes;
 	char		*line;
 
-	history = ts_init_hist();
+	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		line = ts_readline(PROMPT, history);
+		line = ts_readline(PROMPT, env->history);
 		if (!line)
 			return (1);
-		ts_add_hist(line, history);
+		ts_add_hist(line, env->history);
 		line = aliasing(line, env->aliases);
 		if (!line)
 			return (1);
@@ -52,6 +51,6 @@ int	main_loop(t_env *env) {
 		exec(nodes, env);
 		free_node_array(nodes);
 	}
-	ts_free_hist(history);
+	ts_free_hist(env->history);
 	return (0);
 }
