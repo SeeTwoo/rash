@@ -14,29 +14,40 @@
 #include <termios.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "ts_readline.h"
+#include "ts_hist.h"
+#include "ts_readline_struct.h"
 
-typedef struct s_rl	t_rl;
-
-struct s_rl {
-	char		line[1024];
-	int			i;
-	int			len;
-};
+typedef struct termios		t_settings;
 
 void	enable_raw_mode(t_settings *original);
 void	disable_raw_mode(t_settings *original);
 
-/*static void	replace_line(t_rl *rl, t_ts_hist **history, char cmd) {
+static void	replace_line(t_rl *rl, t_ts_hist **history, char cmd) {
+	int	temp;
+
+	if (!(*history))
+		return ;
+	printf("cmd is : %c\n", cmd);
 	if (cmd == 'A' && (*history)->prev)
 		*history = (*history)->prev;
 	else if ((*history)->next)
 		*history = (*history)->next;
-	memcpy(rl->line, (*history)->line, strlen((*history)->line));
+	else
+		return ;
+	temp = rl->i;
+	while (temp > 0) {
+		write(2, "\x1b[D", 3);
+		temp--;
+	}
+	write(2, "\x1b[K", 3);
+	memset(rl->line, '\0', rl->len + 1);
+	memcpy(rl->line, (*history)->line, strlen((*history)->line) + 1);
+	write(2, rl->line, strlen(rl->line));
 }
-*/
 
 static void	fill_command(char *cmd_buf, char *cmd) {
 	int	i;
@@ -54,14 +65,18 @@ static void	fill_command(char *cmd_buf, char *cmd) {
 	cmd_buf[i] = '\0';
 }
 
-static void cursor_left_right(t_rl *rl, int inc) {
-	if (rl->i + inc >= 1022 || rl->i + inc <= 0)
+static void	cursor_forward(t_rl *rl) {
+	if (rl->i >= rl->len)
 		return ;
-	if (inc == -1)
-		write(2, "\x08", 1);
-	else
-		write(2, "\x1b[C", 3);
-	rl->i += inc;
+	rl->i++;
+	write(2, "\x1b[C", 3);
+}
+
+static void	cursor_backward(t_rl *rl) {
+	if (rl->i <= 0)
+		return ;
+	rl->i--;
+	write(2, "\x1b[D", 3);
 }
 
 static void	arrow_handling(t_rl *rl, t_ts_hist **history) {
@@ -72,17 +87,29 @@ static void	arrow_handling(t_rl *rl, t_ts_hist **history) {
 	fill_command(cmd_buf, &cmd);
 	if (cmd != 'A' && cmd != 'B' && cmd != 'C' && cmd != 'D')
 		return ;
-	//if (cmd == 'A' || cmd == 'B')
-	//	replace_line(line_buffer, history, cmd);
-	if (cmd == 'C' || cmd == 'D')
-		cursor_left_right(rl, cmd = 'C' ? -1 : 1);
+	if (cmd == 'A' || cmd == 'B')
+		replace_line(rl, history, cmd);
+	else if (cmd == 'C')
+		cursor_forward(rl);
+	else if (cmd == 'D')
+		cursor_backward(rl);
 }
 
 static void	fill_line(t_rl *rl, char c) {
-	write(2, "\x1b[K", 3);
-	memmove(&rl->line[rl->i + 1], &rl->line[rl->i], 1022 - rl->i);
-	rl->line[rl->i] = c;
-	write(2, &rl->line[rl->i], strlen(&rl->line[rl->i]));
+	char	*dest;
+	char	*src;
+	int		temp;
+
+	dest = &rl->line[rl->i + 1];
+	src = &rl->line[rl->i];
+	memmove(dest, src, strlen(src) + 1);
+	src[0] = c;
+	write(2, src, strlen(src));
+	temp = rl->len;
+	while (temp > rl->i) {
+		write(2, "\x1b[D", 3);
+		temp--;
+	}
 	rl->i++;
 	rl->len++;
 }

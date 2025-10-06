@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         :::     ::::::::   */
-/*   ts_readline.h                                       :+:     :+:    :+:   */
+/*   ts_readline_struct.h                                :+:     :+:    :+:   */
 /*                                                     +:+ +:+        +:+     */
 /*   By: seetwoo <marvin@42students.fr>              +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TS_READLINE_H
-# define TS_READLINE_H
+#ifndef TS_READLINE_STRUCT_H
+# define TS_READLINE_STRUCT_H
 
-typedef struct s_ts_hist	t_ts_hist;
+typedef struct s_rl	t_rl;
 
-char		*ts_readline(char *prompt, t_ts_hist *history);
-
-int			ts_add_hist(char *line, t_ts_hist *history);
-void		ts_free_hist(t_ts_hist *history);
-t_ts_hist	*ts_init_hist(void);
+struct s_rl {
+	char		line[1024];
+	int			i;
+	int			len;
+};
 
 #endif

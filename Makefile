@@ -1,5 +1,5 @@
 NAME = train_shell 
-CC = cc -Wall -Wextra -Werror -Iincludes
+CC = cc -Wall -Wextra -Werror -Iincludes -Its_readline/includes
 CCDEBUG = $(CC) -g3 -O0
 
 SRC_DIR = src

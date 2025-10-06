@@ -6,6 +6,7 @@ SRC_DIR = src
 SRC_FILES = ts_free_hist.c \
 			raw_mode_handling.c \
 			ts_add_hist.c \
+			ts_init_hist.c \
 			ts_readline.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ts_readline.h"
+typedef struct termios		t_settings;
 
 void	disable_raw_mode(t_settings *original) {
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, original);
