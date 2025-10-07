@@ -24,6 +24,7 @@
 void	close_every_fd(void);
 void	exec_builtin(t_node *node, t_env *env);
 void	free_double_array(char **array);
+void	free_kv_list(t_kv_list*);
 void	free_node_array(t_node **nodes);
 void	get_command_binary_path(t_node *node, char **paths);
 int		is_builtin(char *name);
@@ -32,7 +33,7 @@ int		setup_redirections(t_node *command);
 int		trim_command(t_node *node);
 
 //protection of the pipe creation
-static int	get_fds(t_node **nodes, int command_number) {
+static int	get_pipes(t_node **nodes, int command_number) {
 	int	pipe_number;
 	int	temp[2];
 
@@ -47,19 +48,29 @@ static int	get_fds(t_node **nodes, int command_number) {
 	return (0);
 }
 
+static void	clean_child_process(t_node **nodes, t_env *env) {
+	free_node_array(nodes);
+	free_double_array(env->paths);
+	ts_free_hist(env->history);
+	free_kv_list(env->aliases);
+	close_every_fd();
+}
+
+static void	error_child_process(t_node **nodes, t_env *env) {
+	clean_child_process(nodes, env);
+	exit(EXIT_FAILURE);
+}
+
 static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 	char	**cmd_args;
 
 	trim_command(command);
 	get_command_binary_path(command, env->paths);
 	if (setup_redirections(command) == 1)
-		exit(EXIT_FAILURE);
+		error_child_process(nodes, env);
 	cmd_args = command->command;
 	command->command = NULL;
-	free_node_array(nodes);
-	free_double_array(env->paths);
-	ts_free_hist(env->history);
-	close_every_fd();
+	clean_child_process(nodes, env);
 	execve(cmd_args[0], cmd_args, env->env);
 	dprintf(2, "%s%s : %s\n", ERR_HD, cmd_args[0], CMD_FND);
 	free_double_array(cmd_args);
@@ -72,7 +83,7 @@ int	exec(t_node **nodes, t_env *env) {
 	command_number = 0;
 	while (nodes[command_number])
 		command_number++;
-	get_fds(nodes, command_number);
+	get_pipes(nodes, command_number);
 	for (int i = 0; i < command_number; i++) {
 		if (is_builtin(nodes[i]->command[0])) {
 			exec_builtin(nodes[i], env);

@@ -39,6 +39,8 @@ void	get_command_binary_path(t_node *node, char **paths) {
 	char	temp[4096];
 	char	*command_path;
 
+	if (!node || !paths || !(node->command) || !(node->command[0]))
+		return ;
 	if (access(node->command[0], X_OK) == 0)
 		return ;
 	if (find_command_full_path(paths, node->command[0], temp) == 1)

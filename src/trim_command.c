@@ -68,6 +68,8 @@ int	trim_command(t_node *node) {
 	char	**cmd;
 	char	*temp;
 
+	if (!node || !node->command || !node->command[0])
+		return (1);
 	cmd = node->command;
 	for (int i = 0; cmd[i]; i++) {
 		temp = trim_string(cmd[i]);
