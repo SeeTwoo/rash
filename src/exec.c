@@ -51,7 +51,8 @@ static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 
 	trim_command(command);
 	get_command_binary_path(command, env->paths);
-	setup_redirections(command); //check for success later
+	if (setup_redirections(command) == 1)
+		exit(EXIT_FAILURE);
 	cmd_args = command->command;
 	command->command = NULL;
 	free_node_array(nodes);

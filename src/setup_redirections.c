@@ -10,10 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
+#include "messages.h"
 #include "nodes.h"
 #include "redirections.h"
 #include "token_and_node_types.h"
@@ -30,15 +33,15 @@ static int	setup_in_redirs(t_redir *head) {
 	if (!head)
 		return (0);
 	while (head) {
-		if (head->type == IN) {
+		if (head->type == IN)
 			infile_fd = open(head->name, O_RDONLY);
-			dup2(infile_fd, STDIN_FILENO);
-			close(infile_fd);
-		} else if (head->type == HD) {
+		else if (head->type == HD)
 			infile_fd = heredoc(head->name);
-			dup2(infile_fd, STDIN_FILENO);
-			close(infile_fd);
-		}
+		if (infile_fd == -1)
+			return (dprintf(2, "%s%s : %s\n", ERR_HD, head->name, strerror(errno)), 1);
+		if (dup2(infile_fd, STDIN_FILENO) == -1)
+			return (dprintf(2, "%s", strerror(errno)), 1);
+		close(infile_fd);
 		head = head->next;
 	}
 	return (0);

@@ -24,6 +24,8 @@ int	ts_exit(t_env *env);
 int	ts_echo(t_node *command);
 
 int	is_builtin(char *name) {
+	if (!name)
+		return (0);
 	if (strcmp(name, "exit") == 0)
 		return (1);
 	else if (strcmp(name, "echo") == 0)
