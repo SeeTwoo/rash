@@ -18,6 +18,7 @@
 #include <unistd.h>
 
 #include "env.h"
+#include "messages.h"
 #include "nodes.h"
 
 void	close_every_fd(void);
@@ -60,7 +61,7 @@ static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 	ts_free_hist(env->history);
 	close_every_fd();
 	execve(cmd_args[0], cmd_args, env->env);
-	dprintf(2, "%s : command not found\n", cmd_args[0]);
+	dprintf(2, "%s%s : %s\n", ERR_HD, cmd_args[0], CMD_FND);
 	free_double_array(cmd_args);
 	exit(EXIT_FAILURE);
 }

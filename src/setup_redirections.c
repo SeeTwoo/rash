@@ -57,9 +57,9 @@ static int	setup_out_redirs(t_redir *head) {
 		flags = O_WRONLY | O_CREAT | head->type;
 		outfile_fd = open(head->name, flags, 0644);
 		if (outfile_fd == -1)
-			return (1);
+			return (dprintf(2, "%s%s : %s\n", ERR_HD, head->name, strerror(errno)), 1);
 		if (dup2(outfile_fd, STDOUT_FILENO) == -1)
-			return (1);;
+			return (dprintf(2, "%s", strerror(errno)), 1);
 		close(outfile_fd);
 		head = head->next;
 	}
