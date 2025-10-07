@@ -17,11 +17,12 @@
 #include "token.h"
 #include "token_and_node_types.h"
 
+t_node	**create_nodes(t_token **tok_array);
+void	free_token_array(t_token **tok_array);
+void	free_token_list(t_token *list);
+int		is_syntaxically_correct(t_token **tok_array);
 t_token	*lexer(char *line);
 t_token	**list_to_array(t_token *tok_list);
-t_node	**create_nodes(t_token **tok_array);
-int		is_syntaxically_correct(t_token **tok_array);
-void	free_token_array(t_token **tok_array);
 void	set_token_types(t_token **tok_array);
 
 void	print_type(t_token *head) {
@@ -51,9 +52,9 @@ t_node	**parse_line(char *line) {
 		return (NULL);
 	tok_array = list_to_array(tok_list);
 	if (!tok_array)
-		return (NULL);
+		return (free_token_list(tok_list), NULL);
 	if (!is_syntaxically_correct(tok_array))
-		return (NULL);
+		return (free_token_array(tok_array), NULL);
 	set_token_types(tok_array);
 //	print_tok_list(tok_list);
 	nodes = create_nodes(tok_array);
