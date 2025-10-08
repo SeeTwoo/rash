@@ -18,6 +18,7 @@
 #include <unistd.h>
 
 #include "ts_readline.h"
+#include "ts_line_messages.h"
 #include "ts_hist.h"
 #include "ts_readline_struct.h"
 
@@ -25,6 +26,21 @@ typedef struct termios		t_settings;
 
 void	enable_raw_mode(t_settings *original);
 void	disable_raw_mode(t_settings *original);
+
+static int	contains_unclosed_quotes(char *line) {
+	char	quote = 0;
+
+	while (*line) {
+		if (*line == '\'' || *line == '"') {
+			if (quote == 0)
+				quote = *line;
+			else if (quote == *line)
+				quote = 0;
+		}
+		line++;
+	}
+	return (quote != 0);
+}
 
 static void	replace_line(t_rl *rl, t_ts_hist **history, char cmd) {
 	int	temp;
@@ -147,5 +163,7 @@ char	*ts_readline(char *prompt, t_ts_hist *history) {
 	rl.line[rl.len] = '\0';
 	write(2, "\r\v", 2);
 	disable_raw_mode(&original);
+	if (contains_unclosed_quotes(rl.line))
+		return (dprintf(2, "%s\n", UNC_QUOTE), strdup(""));
 	return (strdup(rl.line));
 }
