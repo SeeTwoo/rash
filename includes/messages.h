@@ -30,4 +30,7 @@
 # define NEED_PATTERN "need a pattern to search : <pattern>=<replace>"
 # define NEED_REPLACE "need a string to replace with : <pattern>=<replace>"
 
+//unalias messages
+# define UNAL_USAGE "usage : unalias <pattern> ... OR unalias -a"
+
 #endif

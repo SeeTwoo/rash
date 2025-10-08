@@ -30,6 +30,7 @@ SRC_FILES = aliasing.c \
 			ts_cd.c \
 			ts_echo.c \
 			ts_exit.c \
+			ts_unalias.c \
 			word_token.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

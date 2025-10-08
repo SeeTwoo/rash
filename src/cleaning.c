@@ -19,16 +19,20 @@
 #include "token.h"
 #include "redirections.h"
 
+void	free_kv_node(t_kv_list *node) {
+		free(node->raw);
+		free(node->key);
+		free(node->value);
+		free(node);
+}
+
 void	free_kv_list(t_kv_list *list) {
 	t_kv_list	*temp;
 
 	while (list) {
 		temp = list;
 		list = list->next;
-		free(temp->raw);
-		free(temp->key);
-		free(temp->value);
-		free(temp);
+		free_kv_node(temp);
 	}
 }
 
