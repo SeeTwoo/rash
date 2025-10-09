@@ -7,7 +7,10 @@ SRC_FILES = aliasing.c \
 			builtin_handling.c \
 			cleaning.c \
 			exec.c \
+			exec_config_file.c \
+			exec_script.c \
 			get_command_binary_path.c \
+			get_next_line.c \
 			get_paths.c \
 			get_redirections.c \
 			heredoc.c \
