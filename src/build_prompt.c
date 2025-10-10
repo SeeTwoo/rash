@@ -10,34 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct s_prompt	t_prompt;
+#include <stdbool.h>
+
+/*typedef struct s_prompt	t_prompt;
 
 struct s_prompt {
 	char	*temp;
 	char	*format;
-};
+	size_t	size;
+	bool	continue;
+};*/
 
-void	fill_prompt(char *prompt, size *size, char *format) {
-	size_t	offset;
-
-	offset = strcspn(format, "%");
-	memcpy(prompt, format, offset);
-
+char	*get_wd(char **env) {
+	char	*last_slash;
+	while (strncmp(*env, "PWD", 3) != 0)
+		env++;
+	if (!(*env))
+		return (NULL);
+	while (
 }
 
-void	expand_format(char *prompt, size *size, char *format) {
-	
+char	*get_bit(char *format, t_env *env) {
+	if (strncmp(format, "wd", 2) == 0)
+		return (get_wd(env->env));
 }
 
-void	build_prompt(char *prompt, char *format) {
-	t_prompt	vars;
+void	build_prompt(char *prompt, char *format, t_env *env) {
+	int		total_len;
+	int		bit_len;
+	char	*bit;
 
-	vars->temp = prompt;
-	vars->format = format;
-	while (*format && vars->temp - ) {
-		if (*format != '%')
-			format += fill_prompt(prompt, &size, format);
-		else
-			format += expand_format(prompt, &size, format);
+	while (*format && len <= 255) {
+		if (format != '%') {
+			bit_len = strcspn(format, "=");
+			memcpy(&prompt[total_len], format, bit_len);
+			total_len += bit_len;
+			format += bit_len;
+ 		} else {
+			format++;
+			bit = get_bit(format, env);
+		}
 	}
 }

@@ -25,6 +25,7 @@
 #endif
 
 char	*aliasing(char *line, t_kv_list *aliases);
+void	bulid_prompt(char *prompt, char *format, t_env *env);
 void	free_node_array(t_node **nodes);
 t_node	**parse_line(char *line);
 int		exec(t_node **nodes, t_env *env);
@@ -37,7 +38,7 @@ int	main_loop(t_env *env) {
 
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		build_prompt(prompt, env->ps1);
+		build_prompt(prompt, env->ps1, env);
 		line = ts_readline(prompt, env->history);
 		if (!line)
 			return (1);
