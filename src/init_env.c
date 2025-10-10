@@ -59,6 +59,9 @@ int	init_env(t_env *env, char **arg_env) {
 	env->env = envdup(arg_env);
 	if (!env->env)
 		return (free_double_array(env->paths), 1);
+	env->ps1 = strdup("%wd->");
+	if (!env->ps1)
+		return (free_double_array(env->paths), free_double_array(env->env), 1);
 	env->env_var_number = tab_len(env->env);
 	env->aliases = NULL;
 	env->should_exit = false;

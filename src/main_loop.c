@@ -32,11 +32,13 @@ void	print_nodes(t_node **array);
 
 int	main_loop(t_env *env) {
 	t_node		**nodes;
+	char		prompt[256];
 	char		*line;
 
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		line = ts_readline(PROMPT, env->history);
+		build_prompt(prompt, env->ps1);
+		line = ts_readline(prompt, env->history);
 		if (!line)
 			return (1);
 		ts_add_hist(line, env->history);
