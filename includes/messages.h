@@ -33,4 +33,7 @@
 //unalias messages
 # define UNAL_USAGE "usage : unalias <pattern> ... OR unalias -a"
 
+//variable assignation messages
+# define NEED_NAME "need a variable name to create a variable"
+
 #endif

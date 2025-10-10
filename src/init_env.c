@@ -59,6 +59,7 @@ int	init_env(t_env *env, char **arg_env) {
 	env->env = envdup(arg_env);
 	if (!env->env)
 		return (free_double_array(env->paths), 1);
+	env->env_var_number = tab_len(env->env);
 	env->aliases = NULL;
 	env->should_exit = false;
 	return (0);
