@@ -35,20 +35,20 @@ static int	find_command_full_path(char **paths, char *name, char temp[4096]) {
 	return (1);
 }
 
-void	get_command_binary_path(t_node *node, char **paths) {
+int	get_command_binary_path(t_node *node, char **paths) {
 	char	temp[4096];
 	char	*command_path;
 
 	if (!node || !paths || !(node->command) || !(node->command[0]))
-		return ;
+		return (1);
 	if (access(node->command[0], X_OK) == 0)
-		return ;
+		return (0);
 	if (find_command_full_path(paths, node->command[0], temp) == 1)
-		return ;
+		return (1);
 	command_path = strdup(temp);
 	if (!command_path)
-		return ;
+		return (1);
 	free(node->command[0]);
 	node->command[0] = command_path;
-	return ;
+	return (0);
 }

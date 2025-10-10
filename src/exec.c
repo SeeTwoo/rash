@@ -21,12 +21,13 @@
 #include "messages.h"
 #include "nodes.h"
 
+void	assign_variable(t_env *env, char *new);
 void	close_every_fd(void);
 void	exec_builtin(t_node *node, t_env *env);
 void	free_double_array(char **array);
 void	free_kv_list(t_kv_list*);
 void	free_node_array(t_node **nodes);
-void	get_command_binary_path(t_node *node, char **paths);
+int		get_command_binary_path(t_node *node, char **paths);
 int		is_builtin(char *name);
 void	print_nodes(t_node **nodes);
 int		setup_redirections(t_node *command);
@@ -64,15 +65,16 @@ static void	error_child_process(t_node **nodes, t_env *env) {
 static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 	char	**cmd_args;
 
+	command->pid = fork();
+	if (command->pid != 0)
+		return ;
 	trim_command(command);
-	get_command_binary_path(command, env->paths);
 	if (setup_redirections(command) == 1)
 		error_child_process(nodes, env);
 	cmd_args = command->command;
 	command->command = NULL;
 	clean_child_process(nodes, env);
 	execve(cmd_args[0], cmd_args, env->env);
-	dprintf(2, "%s%s : %s\n", ERR_HD, cmd_args[0], CMD_FND);
 	free_double_array(cmd_args);
 	exit(EXIT_FAILURE);
 }
@@ -85,13 +87,14 @@ int	exec(t_node **nodes, t_env *env) {
 		command_number++;
 	get_pipes(nodes, command_number);
 	for (int i = 0; i < command_number; i++) {
-		if (is_builtin(nodes[i]->command[0])) {
+		if (is_builtin(nodes[i]->command[0]))
 			exec_builtin(nodes[i], env);
-			continue ;
-		}
-		nodes[i]->pid = fork();
-		if (nodes[i]->pid == 0)
+		else if (get_command_binary_path(nodes[i], env->paths) == 0)
 			exec_command(nodes[i], env, nodes);
+		else if (strchr(nodes[i]->command[0], '='))
+			assign_variable(env, nodes[i]->command[0]);
+		else
+			dprintf(2, "%s%s : %s\n", ERR_HD, nodes[i]->command[0], CMD_FND);
 	}
 	close_every_fd();
 	while (--command_number >= 0)

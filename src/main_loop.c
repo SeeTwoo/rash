@@ -21,7 +21,7 @@
 #include "ts_readline.h"
 
 #ifndef PROMPT
-# define PROMPT "\x1b[1;32m\x1b[?2004ltrain> \x1b[0m"
+# define PROMPT "\x1b[1;35m\x1b[?2004ltrain> \x1b[0m"
 #endif
 
 char	*aliasing(char *line, t_kv_list *aliases);

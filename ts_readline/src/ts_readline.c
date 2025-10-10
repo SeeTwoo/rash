@@ -157,6 +157,8 @@ char	*ts_readline(char *prompt, t_ts_hist *history) {
 			backspace_handling(&rl);
 		else if (c == '\x1b')
 			arrow_handling(&rl, &history);
+		else if (c == '\t')
+			continue ;
 		else
 			fill_line(&rl, c);
 	}
