@@ -8,6 +8,7 @@ SRC_FILES = aliasing.c \
 			build_prompt.c \
 			builtin_handling.c \
 			cleaning.c \
+			environment_manipulation.c \
 			exec.c \
 			exec_config_file.c \
 			exec_script.c \
@@ -34,6 +35,7 @@ SRC_FILES = aliasing.c \
 			ts_alias.c \
 			ts_cd.c \
 			ts_echo.c \
+			ts_env.c \
 			ts_exit.c \
 			ts_unalias.c \
 			word_token.c

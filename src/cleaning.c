@@ -20,6 +20,7 @@
 #include "redirections.h"
 
 void	free_kv_node(t_kv_list *node) {
+		printf("%s\n", node->key);
 		free(node->raw);
 		free(node->key);
 		free(node->value);

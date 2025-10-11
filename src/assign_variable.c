@@ -17,57 +17,41 @@
 #include "env.h"
 #include "messages.h"
 
-char	**arrchr(char **array, char *str, size_t name_len) {
-	for (int i = 0; array[i]; i++)
-		if (strncmp(array[i], str, name_len) == 0)
-			return (&array[i]);
+void	add_env_variable(t_kv_list **head, char *s);
+
+t_kv_list	*lstchr(t_kv_list *head, char *s, size_t len) {
+	while (head) {
+		if (strncmp(head->key, s, len) == 0)
+			return (head);
+		head = head->next;
+	}
 	return (NULL);
 }
 
-void	set_env(t_env *env, char *new, char **to_replace) {
-	char	*new_entry;
+int	set_env_node(t_kv_list *node, char *new, size_t name_len) {
+	char	*new_raw = strdup(new);
+	char	*new_value = strdup(&new[name_len + 1]);
 
-	(void)env;
-	new_entry = strdup(new);
-	if (!new_entry)
-		return ;
-	free(*to_replace);
-	*to_replace = new_entry;
-}
-
-void	add_env(t_env *env, char *new) {
-	char	**new_env = malloc(sizeof(char *) * (env->env_var_number + 2));
-	char	*new_var = strdup(new);
-	size_t	i;
-
-	if (!new_env || !new_var) {
-		free(new_env);
-		free(new_var);
-		return ;
-	}
-	i = 0;
-	while (env->env[i]) {
-		new_env[i] = env->env[i];
-		i++;
-	}
-	new_env[i] = new_var;
-	new_env[i + 1] = NULL;
-	free(env->env);
-	env->env = new_env;
-	env->env_var_number += 1;
+	if (!new_raw || !new_value)
+		return (free(new_raw), free(new_value), 1);
+	free(node->raw);
+	free(node->value);
+	node->raw = new_raw;
+	node->value = new_value;
+	return (0);
 }
 
 void	assign_variable(t_env *env, char *new) {
-	size_t	name_len = strcspn(new, "=");
-	char	**variable;
+	t_kv_list	*node;
+	size_t		name_len = strcspn(new, "=");
 
 	if (name_len == 0) {
 		dprintf(2, "%s%s\n", WARN_HD, NEED_NAME);
 		return ;
 	}
-	variable = arrchr(env->env, new, name_len);
-	if (variable)
-		set_env(env, new, variable);
+	node = lstchr(env->env_list, new, name_len);
+	if (node)
+		set_env_node(node, new, name_len);
 	else
-		add_env(env, new);
+		add_env_variable(&(env->env_list), new);
 }

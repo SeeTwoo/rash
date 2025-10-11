@@ -15,15 +15,15 @@
 
 #include "env.h"
 
-static char	*get_wd(char **env) {
+static char	*get_wd(t_kv_list *env) {
 	char	*last_slash;
 	char	*wd;
 
-	while (strncmp(*env, "PWD", 3) != 0)
-		env++;
-	if (!(*env))
+	while (env && env->key && strcmp(env->key, "PWD") != 0)
+		env = env->next;
+	if (!env)
 		return (NULL);
-	wd = *env;
+	wd = env->value;
 	last_slash = wd;
 	while (*wd) {
 		if (*wd == '/')
@@ -37,7 +37,7 @@ static char	*get_wd(char **env) {
 
 static char	*get_bit(char *format, t_env *env) {
 	if (strncmp(format, "wd", 2) == 0)
-		return (get_wd(env->env));
+		return (get_wd(env->env_list));
 	return (NULL);
 }
 
@@ -46,6 +46,11 @@ void	build_prompt(char *prompt, char *format, t_env *env) {
 	int		bit_len;
 	char	*bit;
 
+	if (!format) {
+		strcpy(prompt, "rash> ");
+		return ;
+	}
+	total_len = 0;
 	while (*format && total_len <= 255) {
 		if (*format != '%') {
 			bit_len = strcspn(format, "%");
@@ -62,4 +67,13 @@ void	build_prompt(char *prompt, char *format, t_env *env) {
 		}
 	}
 	prompt[total_len] = '\0';
+}
+
+char	*get_ps1(t_kv_list *list) {
+	while (list) {
+		if (strcmp(list->key, "PS1") == 0)
+			return (list->value);
+		list = list->next;
+	}
+	return (NULL);
 }

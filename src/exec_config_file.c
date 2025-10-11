@@ -22,20 +22,20 @@
 void	exec_script(t_env *env, char *path);
 
 void	exec_config_file(t_env *env) {
-	char	config_path[4096];
-	char	*home;
-	size_t	i;
-	size_t	home_len;
+	char		config_path[4096];
+	char		*home;
+	size_t		home_len;
+	t_kv_list	*temp;
 
-	i = 0;
-	while (env->env[i]) {
-		if (strncmp("HOME=", env->env[i], 5) == 0)
+	temp = env->env_list;
+	while (temp) {
+		if (strcmp("HOME", temp->key) == 0)
 			break ;
-		i++;
+		temp = temp->next;
 	}
-	if (!env->env[i])
+	if (!temp)
 		return ;
-	home = strchr(env->env[i], '=') + 1;
+	home = temp->value;
 	home_len = strlen(home);
 	memcpy(config_path, home, home_len);
 	config_path[home_len] = '/';
