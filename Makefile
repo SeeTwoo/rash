@@ -5,6 +5,7 @@ CCDEBUG = $(CC) -g3 -O0
 SRC_DIR = src
 SRC_FILES = aliasing.c \
 			assign_variable.c \
+			build_prompt.c \
 			builtin_handling.c \
 			cleaning.c \
 			exec.c \

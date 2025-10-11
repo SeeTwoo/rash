@@ -12,10 +12,12 @@ typedef struct s_env	t_env;
 struct s_env {
 	char		**paths;
 	char		**env;
+	char		*ps1;
 	size_t		env_var_number;
 	bool		should_exit;
 	t_kv_list	*aliases;
 	t_ts_hist	*history;
+	t_kv_list	*env_list;
 };
 
 #endif

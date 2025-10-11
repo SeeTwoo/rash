@@ -25,7 +25,7 @@
 #endif
 
 char	*aliasing(char *line, t_kv_list *aliases);
-void	bulid_prompt(char *prompt, char *format, t_env *env);
+void	build_prompt(char *prompt, char *format, t_env *env);
 void	free_node_array(t_node **nodes);
 t_node	**parse_line(char *line);
 int		exec(t_node **nodes, t_env *env);
