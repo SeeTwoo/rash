@@ -19,7 +19,7 @@
 #include "messages.h"
 #include "nodes.h"
 
-void	modify_kv_list(t_kv_list *kv, char *new, ssize_t key_len);
+void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len);
 
 static void	display_aliases(t_kv_list *aliases) {
 	while (aliases) {
@@ -48,7 +48,7 @@ int	ts_alias(t_node *node, t_env *env) {
 		key_len = is_valid_alias(node->command[i]);
 		if (key_len == 1)
 			continue ;
-		modify_kv_list(env->aliases, node->command[i], key_len);
+		modify_kv_list(&(env->aliases), node->command[i], key_len);
 	}
 	return (0);
 }

@@ -67,14 +67,14 @@ t_kv_list	*kv_n_chr(t_kv_list *list, char *key, size_t n) {
 	return (NULL);
 }
 
-void	modify_kv_list(t_kv_list *kv, char *new, ssize_t key_len) {
+void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len) {
 	t_kv_list	*to_modify;
 
-	to_modify = kv_n_chr(kv, new, key_len);
+	to_modify = kv_n_chr(*kv, new, key_len);
 	if (to_modify)
 		set_kv_value(to_modify, new, key_len);
 	else
-		add_kv_back(&kv, new_kv_node(new));
+		add_kv_back(kv, new_kv_node(new));
 }
 
 char	*get_kv_value(t_kv_list *list, char *key) {

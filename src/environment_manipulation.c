@@ -42,37 +42,3 @@ char	**list_to_env(t_kv_list *list) {
 	dest[i] = NULL;
 	return (dest);
 }
-
-/*static size_t	tab_len(char **env) {
-	size_t	i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
-}
-
-static void	free_tab(char **env, int i) {
-	i--;
-	while (i >= 0) {
-		free(env[i]);
-		i--;
-	}
-	free(env);
-}
-
-static char	**envdup(char **env) {
-	char	**new = malloc(sizeof(char *) * tab_len(env));
-	size_t	i = 0;
-
-	if (!new)
-		return (NULL);
-	while (env[i]) {
-		new[i] = strdup(env[i]);
-		if (!new[i])
-			return (free_tab(env, (int)i), NULL);
-		i++;
-	}
-	new[i] = NULL;
-	return (new);
-}*/
