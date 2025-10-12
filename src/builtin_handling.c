@@ -19,7 +19,7 @@
 int	setup_redirections(t_node *node);
 int	trim_command(t_node *node);
 int	ts_alias(t_node *node, t_env *env);
-int	ts_cd(t_node *node);
+int	ts_cd(t_node *node, t_kv_list *env);
 int	ts_env(t_kv_list *list);
 int	ts_exit(t_env *env);
 int	ts_echo(t_node *command);
@@ -54,7 +54,7 @@ void	exec_builtin(t_node *node, t_env *env) {
 	else if (strcmp(node->command[0], "echo") == 0)
 		ts_echo(node);
 	else if (strcmp(node->command[0], "cd") == 0)
-		ts_cd(node);
+		ts_cd(node, env->env_list);
 	else if (strcmp(node->command[0], "alias") == 0)
 		ts_alias(node, env);
 	else if (strcmp(node->command[0], "unalias") == 0)

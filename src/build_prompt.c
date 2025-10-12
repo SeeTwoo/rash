@@ -15,15 +15,13 @@
 
 #include "env.h"
 
+char	*get_kv_value(t_kv_list *list, char *key);
+
 static char	*get_wd(t_kv_list *env) {
 	char	*last_slash;
 	char	*wd;
 
-	while (env && env->key && strcmp(env->key, "PWD") != 0)
-		env = env->next;
-	if (!env)
-		return (NULL);
-	wd = env->value;
+	wd = get_kv_value(env, "PWD");
 	last_slash = wd;
 	while (*wd) {
 		if (*wd == '/')
@@ -67,13 +65,4 @@ void	build_prompt(char *prompt, char *format, t_env *env) {
 		}
 	}
 	prompt[total_len] = '\0';
-}
-
-char	*get_ps1(t_kv_list *list) {
-	while (list) {
-		if (strcmp(list->key, "PS1") == 0)
-			return (list->value);
-		list = list->next;
-	}
-	return (NULL);
 }
