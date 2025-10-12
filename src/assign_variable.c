@@ -17,19 +17,24 @@
 #include "env.h"
 #include "messages.h"
 
-void	add_env_variable(t_kv_list **head, char *s);
+void	modify_kv_list(t_kv_list *kv, char *new, ssize_t key_len);
+
+static ssize_t	is_valid_variable(char *new) {
+	ssize_t	key_len;
+
+	if (!strchr(new, '='))
+		return (dprintf(2, "%s%s\n", WARN_HD, NEED_EQUAL), -1);
+	key_len = strcspn(new, "=");
+	if (key_len == 0)
+		return (dprintf(2, "%s%s\n", WARN_HD, NEED_NAME), -1);
+	return (key_len);
+}
 
 void	assign_variable(t_env *env, char *new) {
-	size_t		name_len = strcspn(new, "=");
-	t_kv_list	*to_modify;
+	ssize_t	key_len;
 
-	if (name_len == 0) {
-		dprintf(2, "%s%s\n", WARN_HD, NEED_NAME);
+	key_len = is_valid_variable(new);
+	if (key_len == -1)
 		return ;
-	}
-	to_modify = kv_n_chr(env->env_list, new, name_len);
-	if (to_modify)
-		set_kv_value(to_modify, new, name_len);
-	else
-		add_kv_back(&(env->env_list), new);
+	modify_kv_list(env->env_list, new, key_len);
 }

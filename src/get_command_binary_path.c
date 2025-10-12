@@ -42,7 +42,7 @@ static int	find_command_full_path(char *paths, char *name, char temp[4096]) {
 	return (1);
 }
 
-int	get_command_binary_path(t_node *node, char *path_variable) {
+int	get_bin_path(t_node *node, char *path_variable) {
 	char	temp[4096];
 	char	*command_path;
 

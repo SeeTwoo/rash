@@ -28,8 +28,8 @@ void	exec_builtin(t_node *node, t_env *env);
 void	free_double_array(char **array);
 void	free_kv_list(t_kv_list*);
 void	free_node_array(t_node **nodes);
-int		get_command_binary_path(t_node *node, char *path);
-char	*get_path(t_env *env);
+int		get_bin_path(t_node *node, char *path);
+char	*get_kv_value(t_kv_list *list, char *key);
 int		is_builtin(char *name);
 void	print_nodes(t_node **nodes);
 int		setup_redirections(t_node *command);
@@ -94,7 +94,7 @@ int	exec(t_node **nodes, t_env *env) {
 	for (int i = 0; i < command_number; i++) {
 		if (is_builtin(nodes[i]->command[0]))
 			exec_builtin(nodes[i], env);
-		else if (get_command_binary_path(nodes[i], get_path(env)) == 0)
+		else if (get_bin_path(nodes[i], get_kv_value(env->env_list, "PATH")) == 0)
 			exec_command(nodes[i], env, nodes);
 		else if (strchr(nodes[i]->command[0], '='))
 			assign_variable(env, nodes[i]->command[0]);

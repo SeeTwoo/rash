@@ -19,6 +19,7 @@ SRC_FILES = aliasing.c \
 			heredoc.c \
 			init_env.c \
 			is_token_type.c \
+			kv_list.c \
 			lexer.c \
 			list_to_array.c \
 			main.c \
