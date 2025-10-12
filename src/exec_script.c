@@ -28,7 +28,7 @@ t_node	**parse_line(char *line);
 void	nullifythenewline(char *line) {
 	char	*nl;
 
-	nl = strchr(line, '\n');
+	nl = strrchr(line, '\n');
 	if (!nl)
 		return ;
 	*nl = '\0';

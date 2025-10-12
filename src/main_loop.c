@@ -25,21 +25,22 @@
 #endif
 
 char	*aliasing(char *line, t_kv_list *aliases);
-void	bulid_prompt(char *prompt, char *format, t_env *env);
+void	build_prompt(char *prompt, char *format, t_env *env);
 void	free_node_array(t_node **nodes);
+char	*get_ps1(t_kv_list *env);
 t_node	**parse_line(char *line);
 int		exec(t_node **nodes, t_env *env);
 void	print_nodes(t_node **array);
 
 int	main_loop(t_env *env) {
 	t_node		**nodes;
-	char		prompt[256];
+	//char		prompt[256];
 	char		*line;
 
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		build_prompt(prompt, env->ps1, env);
-		line = ts_readline(prompt, env->history);
+	//	build_prompt(prompt, get_ps1(env->env_list), env);
+		line = ts_readline(PROMPT, env->history);
 		if (!line)
 			return (1);
 		ts_add_hist(line, env->history);

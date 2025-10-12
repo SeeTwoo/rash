@@ -5,18 +5,21 @@ CCDEBUG = $(CC) -g3 -O0
 SRC_DIR = src
 SRC_FILES = aliasing.c \
 			assign_variable.c \
+			build_prompt.c \
 			builtin_handling.c \
 			cleaning.c \
+			environment_manipulation.c \
 			exec.c \
 			exec_config_file.c \
 			exec_script.c \
-			get_command_binary_path.c \
+			get_bin_path.c \
 			get_next_line.c \
 			get_paths.c \
 			get_redirections.c \
 			heredoc.c \
 			init_env.c \
 			is_token_type.c \
+			kv_list.c \
 			lexer.c \
 			list_to_array.c \
 			main.c \
@@ -33,6 +36,7 @@ SRC_FILES = aliasing.c \
 			ts_alias.c \
 			ts_cd.c \
 			ts_echo.c \
+			ts_env.c \
 			ts_exit.c \
 			ts_unalias.c \
 			word_token.c

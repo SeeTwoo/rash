@@ -11,28 +11,34 @@
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <string.h>
 
-/*typedef struct s_prompt	t_prompt;
+#include "env.h"
 
-struct s_prompt {
-	char	*temp;
-	char	*format;
-	size_t	size;
-	bool	continue;
-};*/
-
-char	*get_wd(char **env) {
+static char	*get_wd(t_kv_list *env) {
 	char	*last_slash;
-	while (strncmp(*env, "PWD", 3) != 0)
-		env++;
-	if (!(*env))
+	char	*wd;
+
+	while (env && env->key && strcmp(env->key, "PWD") != 0)
+		env = env->next;
+	if (!env)
 		return (NULL);
-	while (
+	wd = env->value;
+	last_slash = wd;
+	while (*wd) {
+		if (*wd == '/')
+			last_slash = wd;
+		wd++;
+	}
+	if (*last_slash == '/')
+		last_slash++;
+	return (last_slash);
 }
 
-char	*get_bit(char *format, t_env *env) {
+static char	*get_bit(char *format, t_env *env) {
 	if (strncmp(format, "wd", 2) == 0)
-		return (get_wd(env->env));
+		return (get_wd(env->env_list));
+	return (NULL);
 }
 
 void	build_prompt(char *prompt, char *format, t_env *env) {
@@ -40,15 +46,34 @@ void	build_prompt(char *prompt, char *format, t_env *env) {
 	int		bit_len;
 	char	*bit;
 
-	while (*format && len <= 255) {
-		if (format != '%') {
-			bit_len = strcspn(format, "=");
+	if (!format) {
+		strcpy(prompt, "rash> ");
+		return ;
+	}
+	total_len = 0;
+	while (*format && total_len <= 255) {
+		if (*format != '%') {
+			bit_len = strcspn(format, "%");
 			memcpy(&prompt[total_len], format, bit_len);
 			total_len += bit_len;
 			format += bit_len;
  		} else {
 			format++;
 			bit = get_bit(format, env);
+			bit_len = strlen(bit);
+			memcpy(&prompt[total_len], bit, bit_len);
+			total_len += bit_len;
+			format += 2;
 		}
 	}
+	prompt[total_len] = '\0';
+}
+
+char	*get_ps1(t_kv_list *list) {
+	while (list) {
+		if (strcmp(list->key, "PS1") == 0)
+			return (list->value);
+		list = list->next;
+	}
+	return (NULL);
 }

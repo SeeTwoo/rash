@@ -1,43 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         :::     ::::::::   */
-/*   init_env.c                                          :+:     :+:    :+:   */
+/*   ts_env.c                                            :+:     :+:    :+:   */
 /*                                                     +:+ +:+        +:+     */
-/*   By: walter </var/spool/mail/walter>             +#+  +:+       +#+       */
+/*   By: seetwoo <marvin@42students.fr>              +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created:                                           #+#    #+#            */
 /*   Uptated:                                          ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
 
 #include "env.h"
 
-t_kv_list	*new_kv_node(char *new);
-
-static t_kv_list *env_to_list(char **env) {
-	t_kv_list	*head;
-	t_kv_list	*tail;
-
-	if (!(*env))
-		return (NULL);
-	head = new_kv_node(*env);
-	tail = head;
-	env++;
-	while (*env) {
-		tail->next = new_kv_node(*env);
-		tail = tail->next;
-		env++;
+int	ts_env(t_kv_list *list) {
+	while (list) {
+		printf("%s\n", list->raw);
+		list = list->next;
 	}
-	return (head);
-}
-
-int	init_env(t_env *env, char **arg_env) {
-	env->env_list = env_to_list(arg_env);
-	env->history = NULL;
-	env->aliases = NULL;
-	env->should_exit = false;
 	return (0);
 }

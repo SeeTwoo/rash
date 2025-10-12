@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 #include "env.h"
 
 void	exec_config_file(t_env *env);
@@ -28,7 +30,7 @@ int	main(int ac, char **av, char **arg_env) {
 		return (1);
 	exec_config_file(&env);
 	main_loop(&env);
-	free_double_array(env.paths);
+	free_kv_list(env.env_list);
 	free_kv_list(env.aliases);
 	return (0);
 }
