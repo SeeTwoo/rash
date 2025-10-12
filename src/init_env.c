@@ -23,7 +23,7 @@ static t_kv_list *env_to_list(char **env) {
 	t_kv_list	*head = NULL;
 
 	while (*env) {
-		add_env_variable(&head, *env);
+		add_kv_node(&head, *env);
 		env++;
 	}
 	return (head);

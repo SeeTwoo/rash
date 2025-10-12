@@ -21,21 +21,21 @@
 
 void	exec_script(t_env *env, char *path);
 
+char	*get_home(t_kv_list *list) {
+	while (list) {
+		if (strcmp(list->key, "HOME") == 0)
+			return (list->value);
+		list = list->next;
+	}
+	return (NULL);
+}
+
 void	exec_config_file(t_env *env) {
 	char		config_path[4096];
 	char		*home;
 	size_t		home_len;
-	t_kv_list	*temp;
 
-	temp = env->env_list;
-	while (temp) {
-		if (strcmp("HOME", temp->key) == 0)
-			break ;
-		temp = temp->next;
-	}
-	if (!temp)
-		return ;
-	home = temp->value;
+	home = get_home(env->env_list);
 	home_len = strlen(home);
 	memcpy(config_path, home, home_len);
 	config_path[home_len] = '/';

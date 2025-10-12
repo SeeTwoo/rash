@@ -26,16 +26,6 @@ static void	display_aliases(t_kv_list *aliases) {
 	}
 }
 
-static void	set_value(t_kv_list *node, char *new_kv) {
-	char	*value_start;
-
-	value_start = strchr(new_kv, '=') + 1;
-	free(node->raw);
-	free(node->value);
-	node->raw = strdup(new_kv);
-	node->value = strdup(value_start);
-}
-
 static size_t	is_valid_alias(char *new_kv) {
 	size_t	pattern_len;
 	size_t	replace_len;
@@ -51,48 +41,15 @@ static size_t	is_valid_alias(char *new_kv) {
 	return (1);
 }
 
-static void	insert_alias(t_env *env, t_kv_list *new) {
-	t_kv_list	*temp;
+void	add_alias(t_kv_list *aliases, char *arg) {
+	t_kv_list	*to_modify;
 
-	if (!new)
-		return ;
-	if (!(env->aliases)) {
-		env->aliases = new;
+	to_modify = kv_chr(aliases, arg);
+	if (!to_modify) {
+		add_kv_back(&aliases), arg);
 		return ;
 	}
-	temp = env->aliases;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
-}
-
-static t_kv_list	*new_kv_node(char *new_kv) {
-	t_kv_list	*new;
-	size_t		len;
-
-	new = malloc(sizeof(t_kv_list));
-	if (!new)
-		return (NULL);
-	len = strcspn(new_kv, "=");
-	new->raw = strdup(new_kv);
-	new->key = strndup(new_kv, len);
-	new->value = strdup(&new_kv[len + 1]);
-	new->next = NULL;
-	return (new);
-}
-
-void	add_alias(t_env *env, char *arg) {
-	t_kv_list	*temp;
-
-	temp = env->aliases;
-	while (temp) {
-		if (strncmp(temp->key, arg, strlen(temp->key)) == 0) {
-			set_value(temp, arg);
-			return ;
-		}
-		temp = temp->next;
-	}
-	insert_alias(env, new_kv_node(arg));
+	set_kv_value(to_modify, arg);
 }
 
 int	ts_alias(t_node *node, t_env *env) {
