@@ -21,13 +21,13 @@
 #include "ts_readline.h"
 
 #ifndef PROMPT
-# define PROMPT "\x1b[1;35m\x1b[?2004ltrain> \x1b[0m"
+# define PROMPT "\x1b[1;32m\x1b[?2004ltrain> \x1b[0m"
 #endif
 
 char	*aliasing(char *line, t_kv_list *aliases);
 void	build_prompt(char *prompt, char *format, t_env *env);
 void	free_node_array(t_node **nodes);
-char	*get_ps1(t_kv_list *env);
+char	*get_kv_value(t_kv_list *list, char *key);
 t_node	**parse_line(char *line);
 int		exec(t_node **nodes, t_env *env);
 void	print_nodes(t_node **array);

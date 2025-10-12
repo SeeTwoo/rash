@@ -94,10 +94,10 @@ int	exec(t_node **nodes, t_env *env) {
 	for (int i = 0; i < command_number; i++) {
 		if (is_builtin(nodes[i]->command[0]))
 			exec_builtin(nodes[i], env);
-		else if (get_bin_path(nodes[i], get_kv_value(env->env_list, "PATH")) == 0)
-			exec_command(nodes[i], env, nodes);
 		else if (strchr(nodes[i]->command[0], '='))
 			assign_variable(env, nodes[i]->command[0]);
+		else if (get_bin_path(nodes[i], get_kv_value(env->env_list, "PATH")) == 0)
+			exec_command(nodes[i], env, nodes);
 		else
 			dprintf(2, "%s%s : %s\n", ERR_HD, nodes[i]->command[0], CMD_FND);
 	}
