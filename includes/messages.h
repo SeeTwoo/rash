@@ -38,5 +38,6 @@
 
 //cd 
 # define BROKEN_ENV "malloc failed, the environment is now missing variables and may behave weirdly"
+# define TOO_MANY "too many arguments"
 
 #endif
