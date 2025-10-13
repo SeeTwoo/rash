@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "env.h"
@@ -39,7 +40,7 @@ static char	*get_bit(char *format, t_env *env) {
 	return (NULL);
 }
 
-void	build_prompt(char *prompt, char *format, t_env *env) {
+static void fill_prompt(char *prompt, char *format, t_env *env) {
 	int		total_len;
 	int		bit_len;
 	char	*bit;
@@ -65,4 +66,30 @@ void	build_prompt(char *prompt, char *format, t_env *env) {
 		}
 	}
 	prompt[total_len] = '\0';
+}
+
+void	escaping(char *ps1) {
+	char	*end;
+
+	while (*ps1) {
+		if (*ps1 == '\'' || *ps1 == '\"')
+			memmove(ps1, ps1 + 1, strlen(ps1 + 1) + 1);
+		if (strncmp(ps1, "\\x", 2) == 0) {
+			*ps1 = (char)strtol(ps1 + 2, &end, 16);
+			memmove(ps1 + 1, end, strlen(end) + 1);
+		}
+		ps1++;
+	}
+}
+
+void	build_prompt(char *prompt, char *format, t_env *env) {
+	char	*ps1_dup = strdup(format);
+
+	if (!ps1_dup) {
+		fill_prompt(prompt, format, env);
+	} else {
+		escaping(ps1_dup);
+		fill_prompt(prompt, ps1_dup, env);
+	}
+	free(ps1_dup);
 }

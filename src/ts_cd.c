@@ -31,7 +31,7 @@ int	ts_cd(t_node *node, t_kv_list *env) {
 		return (dprintf(2, "%s%s : %s\n", ERR_HD, node->command[1], strerror(errno)), 1);
 	free(old_pwd->value);
 	old_pwd->value = pwd->value;
-	pwd->value = strdup(node->command[1]);
+	pwd->value = getcwd(NULL, 0);
 	if (!(pwd->value))
 		dprintf(2, "%s%s", WARN_HD, BROKEN_ENV);
 	return (0);
