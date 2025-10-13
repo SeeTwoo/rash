@@ -36,4 +36,7 @@
 //variable assignation messages
 # define NEED_NAME "need a variable name to create a variable"
 
+//cd 
+# define BROKEN_ENV "malloc failed, the environment is now missing variables and may behave weirdly"
+
 #endif

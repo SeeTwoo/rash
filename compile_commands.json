@@ -162,12 +162,12 @@
       "-Its_readline/includes",
       "-c",
       "-o",
-      "obj/get_command_binary_path.o",
-      "src/get_command_binary_path.c"
+      "obj/get_bin_path.o",
+      "src/get_bin_path.c"
     ],
     "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/get_command_binary_path.c",
-    "output": "/home/seetwoo/Documents/rash/obj/get_command_binary_path.o"
+    "file": "/home/seetwoo/Documents/rash/src/get_bin_path.c",
+    "output": "/home/seetwoo/Documents/rash/obj/get_bin_path.o"
   },
   {
     "arguments": [
@@ -270,6 +270,23 @@
     "directory": "/home/seetwoo/Documents/rash",
     "file": "/home/seetwoo/Documents/rash/src/is_token_type.c",
     "output": "/home/seetwoo/Documents/rash/obj/is_token_type.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iincludes",
+      "-Its_readline/includes",
+      "-c",
+      "-o",
+      "obj/kv_list.o",
+      "src/kv_list.c"
+    ],
+    "directory": "/home/seetwoo/Documents/rash",
+    "file": "/home/seetwoo/Documents/rash/src/kv_list.c",
+    "output": "/home/seetwoo/Documents/rash/obj/kv_list.o"
   },
   {
     "arguments": [
