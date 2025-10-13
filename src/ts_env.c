@@ -16,7 +16,7 @@
 
 int	ts_env(t_kv_list *list) {
 	while (list) {
-		printf("%s\n", list->raw);
+		printf("%s=%s\n", list->key, list->value);
 		list = list->next;
 	}
 	return (0);

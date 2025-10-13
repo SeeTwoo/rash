@@ -23,7 +23,7 @@ void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len);
 
 static void	display_aliases(t_kv_list *aliases) {
 	while (aliases) {
-		printf("%s\n", aliases->raw);
+		printf("%s=%s\n", aliases->key, aliases->value);
 		aliases = aliases->next;
 	}
 }

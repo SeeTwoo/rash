@@ -23,11 +23,10 @@ t_kv_list	*new_kv_node(char *new_kv) {
 	if (!new)
 		return (NULL);
 	len = strcspn(new_kv, "=");
-	new->raw = strdup(new_kv);
 	new->key = strndup(new_kv, len);
 	new->value = strdup(&new_kv[len + 1]);
-	if (!(new->raw) || !(new->key) || !(new->value))
-		return (free(new->raw), free(new->key), free(new->value), free(new), NULL);
+	if (!(new->key) || !(new->value))
+		return (free(new->key), free(new->value), free(new), NULL);
 	new->next = NULL;
 	return (new);
 }
@@ -46,14 +45,11 @@ void	add_kv_back(t_kv_list **list, t_kv_list *new) {
 }
 
 int	set_kv_value(t_kv_list *node, char *new, size_t name_len) {
-	char	*new_raw = strdup(new);
 	char	*new_value = strdup(&new[name_len + 1]);
 
-	if (!new_raw || !new_value)
-		return (free(new_raw), free(new_value), 1);
-	free(node->raw);
+	if (!new_value)
+		return (free(new_value), 1);
 	free(node->value);
-	node->raw = new_raw;
 	node->value = new_value;
 	return (0);
 }

@@ -28,6 +28,18 @@ static size_t	listlen(t_kv_list *list) {
 	return (i);
 }
 
+static char	*build_env_line(char *key, char *value) {
+	size_t	key_len = strlen(key);
+	char	*dest = malloc(sizeof(char) * (key_len + strlen(value) + 2));
+
+	if (!dest)
+		return (NULL);
+	strcpy(dest, key);
+	strcpy(&dest[key_len], "=");
+	strcpy(&dest[key_len + 1], value);
+	return (dest);
+}
+
 char	**list_to_env(t_kv_list *list) {
 	char	**dest = malloc(sizeof(char *) * (listlen(list) + 1));
 	size_t	i = 0;
@@ -35,7 +47,7 @@ char	**list_to_env(t_kv_list *list) {
 	if (!dest)
 		return (NULL);
 	while (list) {
-		dest[i] = strdup(list->raw);
+		dest[i] = build_env_line(list->key, list->value);
 		list = list->next;
 		i++;
 	}
