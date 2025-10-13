@@ -36,14 +36,11 @@ char	*trim_string(char *s);
 int	main_loop(t_env *env) {
 	t_node		**nodes;
 	char		prompt[256];
-	char		*trimmed_ps1;
 	char		*line;
 
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		trimmed_ps1 = trim_string(get_kv_value(env->env_list, "PS1"));
-		build_prompt(prompt, trimmed_ps1, env);
-		free(trimmed_ps1);
+		build_prompt(prompt, get_kv_value(env->env_list, "PS1"), env);
 		line = ts_readline(prompt, env->history);
 		if (!line)
 			return (1);
