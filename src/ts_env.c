@@ -19,5 +19,6 @@ int	ts_env(t_kv_list *list) {
 		printf("%s=%s\n", list->key, list->value);
 		list = list->next;
 	}
+	fflush(stdout);
 	return (0);
 }

@@ -26,20 +26,24 @@
 
 char	*aliasing(char *line, t_kv_list *aliases);
 void	build_prompt(char *prompt, char *format, t_env *env);
+int		exec(t_node **nodes, t_env *env);
 void	free_node_array(t_node **nodes);
 char	*get_kv_value(t_kv_list *list, char *key);
 t_node	**parse_line(char *line);
-int		exec(t_node **nodes, t_env *env);
 void	print_nodes(t_node **array);
+char	*trim_string(char *s);
 
 int	main_loop(t_env *env) {
 	t_node		**nodes;
 	char		prompt[256];
+	char		*trimmed_ps1;
 	char		*line;
 
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		build_prompt(prompt, get_kv_value(env->env_list, "PS1"), env);
+		trimmed_ps1 = trim_string(get_kv_value(env->env_list, "PS1"));
+		build_prompt(prompt, trimmed_ps1, env);
+		free(trimmed_ps1);
 		line = ts_readline(prompt, env->history);
 		if (!line)
 			return (1);
