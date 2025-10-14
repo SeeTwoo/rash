@@ -25,6 +25,7 @@ void	assign_variable(t_env *env, char *new);
 void	close_every_fd(void);
 char	**list_to_env(t_kv_list *env);
 void	exec_builtin(t_node *node, t_env *env);
+int		expand_command(char **cmd, t_kv_list *env);
 void	free_double_array(char **array);
 void	free_kv_list(t_kv_list*);
 void	free_node_array(t_node **nodes);
@@ -71,6 +72,7 @@ static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 	command->pid = fork();
 	if (command->pid != 0)
 		return ;
+	expand_command(command->command, env->env_list);
 	trim_command(command);
 	if (setup_redirections(command) == 1)
 		error_child_process(nodes, env);

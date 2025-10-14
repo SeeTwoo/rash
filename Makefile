@@ -12,6 +12,7 @@ SRC_FILES = aliasing.c \
 			exec.c \
 			exec_config_file.c \
 			exec_script.c \
+			expansion.c \
 			get_bin_path.c \
 			get_next_line.c \
 			get_paths.c \

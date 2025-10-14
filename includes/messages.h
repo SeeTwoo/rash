@@ -40,4 +40,7 @@
 # define BROKEN_ENV "malloc failed, the environment is now missing variables and may behave weirdly"
 # define TOO_MANY "too many arguments"
 
+//expansion
+# define EXP_FAILED_MALLOC "malloc failed, a variable was not expanded"
+
 #endif

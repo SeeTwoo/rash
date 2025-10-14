@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **arg_env) {
 		return (1);
 	if (init_env(&env, arg_env) != 0)
 		return (1);
-	exec_config_file(&env);
+//	exec_config_file(&env);
 	main_loop(&env);
 	free_kv_list(env.env_list);
 	free_kv_list(env.aliases);

@@ -16,6 +16,7 @@
 #include "env.h"
 #include "nodes.h"
 
+int	expand_command(char **cmd, t_kv_list *env);
 int	setup_redirections(t_node *node);
 int	trim_command(t_node *node);
 int	ts_alias(t_node *node, t_env *env);
@@ -47,6 +48,7 @@ void	exec_builtin(t_node *node, t_env *env) {
 	int	saved_stdin = dup(STDIN_FILENO);
 	int	saved_stdout = dup(STDOUT_FILENO);
 
+	expand_command(node->command, env->env_list);
 	trim_command(node);
 	setup_redirections(node);
 	if (strcmp(node->command[0], "exit") == 0)
