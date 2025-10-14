@@ -99,3 +99,42 @@ t_kv_list	*kv_chr(t_kv_list *list, char *key) {
 	}
 	return (NULL);
 }
+
+void	free_kv_node(t_kv_list *node) {
+	free(node->key);
+	free(node->value);
+	free(node);
+}
+
+void	free_kv_list(t_kv_list *list) {
+	t_kv_list	*temp;
+
+	while (list) {
+		temp = list;
+		list = list->next;
+		free_kv_node(temp);
+	}
+}
+
+void	delete_kv_node(t_kv_list **list, char *key) {
+	t_kv_list	*prev = NULL;
+	t_kv_list	*temp = *list;
+	t_kv_list	*to_delete = NULL;
+
+	while (temp) {
+		if (strcmp(temp->key, key) == 0) {
+			to_delete = temp;
+			break ;
+		}
+		prev = temp;
+		temp = temp->next;
+	}
+	if (!to_delete)
+		return ;
+	if (!prev)
+		*list = to_delete->next;
+	else
+		prev->next = to_delete->next;
+	free_kv_node(to_delete);
+	return ;
+}

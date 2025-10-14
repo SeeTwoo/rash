@@ -19,12 +19,13 @@
 int	expand_command(char **cmd, t_kv_list *env);
 int	setup_redirections(t_node *node);
 int	trim_command(t_node *node);
-int	ts_alias(t_node *node, t_env *env);
-int	ts_cd(t_node *node, t_kv_list *env);
-int	ts_env(t_kv_list *list);
-int	ts_exit(t_env *env);
-int	ts_echo(t_node *command);
-int	ts_unalias(t_node *node, t_env *env);
+int	ts_alias(t_node *cmd, t_env *env);
+int	ts_cd(t_node *cmd, t_env *env);
+int	ts_env(t_node *cmd, t_env *env);
+int	ts_exit(t_node *cmd, t_env *env);
+int	ts_echo(t_node *cmd, t_env *env);
+int	ts_unalias(t_node *cmd, t_env *env);
+int	ts_unset(t_node *cmd, t_env *env);
 
 int	is_builtin(char *name) {
 	if (!name)
@@ -41,6 +42,8 @@ int	is_builtin(char *name) {
 		return (1);
 	else if (strcmp(name, "env") == 0)
 		return (1);
+	else if (strcmp(name, "unset") == 0)
+		return (1);
 	return (0);
 }
 
@@ -52,17 +55,19 @@ void	exec_builtin(t_node *node, t_env *env) {
 	trim_command(node);
 	setup_redirections(node);
 	if (strcmp(node->command[0], "exit") == 0)
-		ts_exit(env);
+		ts_exit(node, env);
 	else if (strcmp(node->command[0], "echo") == 0)
-		ts_echo(node);
+		ts_echo(node, env);
 	else if (strcmp(node->command[0], "cd") == 0)
-		ts_cd(node, env->env_list);
+		ts_cd(node, env);
 	else if (strcmp(node->command[0], "alias") == 0)
 		ts_alias(node, env);
 	else if (strcmp(node->command[0], "unalias") == 0)
 		ts_unalias(node, env);
 	else if (strcmp(node->command[0], "env") == 0)
-		ts_env(env->env_list);
+		ts_env(node, env);
+	else if (strcmp(node->command[0], "unset")  == 0)
+		ts_unset(node, env);
 	dup2(saved_stdin, STDIN_FILENO);
 	dup2(saved_stdout, STDOUT_FILENO);
 	close(saved_stdin);

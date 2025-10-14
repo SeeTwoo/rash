@@ -13,8 +13,12 @@
 #include <stdio.h>
 
 #include "env.h"
+#include "nodes.h"
 
-int	ts_env(t_kv_list *list) {
+int	ts_env(t_node *cmd, t_env *env) {
+	t_kv_list	*list = env->env_list;
+
+	(void)cmd;
 	while (list) {
 		printf("%s=%s\n", list->key, list->value);
 		list = list->next;

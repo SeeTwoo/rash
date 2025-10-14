@@ -83,8 +83,11 @@ void	escaping(char *ps1) {
 }
 
 void	build_prompt(char *prompt, char *format, t_env *env) {
+	if (!format) {
+		fill_prompt(prompt, "\x1b[32m rash> \x1b[0m", env);
+		return ;
+	}
 	char	*ps1_dup = strdup(format);
-
 	if (!ps1_dup) {
 		fill_prompt(prompt, format, env);
 	} else {

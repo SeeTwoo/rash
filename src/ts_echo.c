@@ -14,6 +14,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "env.h"
 #include "nodes.h"
 
 char	**first_arg(char **command) {
@@ -22,9 +23,10 @@ char	**first_arg(char **command) {
 	return (&command[1]);
 }
 
-int	ts_echo(t_node *command) {
+int	ts_echo(t_node *command, t_env *env) {
 	char	**args;
 
+	(void)env;
 	args = first_arg(command->command);
 	while (*args) {
 		write(1, *args, strlen(*args));
