@@ -35,13 +35,13 @@ char	*trim_string(char *s);
 
 int	main_loop(t_env *env) {
 	t_node		**nodes;
-	char		prompt[256];
+	//char		prompt[256];
 	char		*line;
 
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
-		build_prompt(prompt, get_kv_value(env->env_list, "PS1"), env);
-		line = ts_readline(prompt, env->history);
+//		build_prompt(prompt, get_kv_value(env->env_list, "PS1"), env);
+		line = ts_readline(/*prompt*/ PROMPT, env->history);
 		if (!line)
 			return (1);
 		ts_add_hist(line, env->history);

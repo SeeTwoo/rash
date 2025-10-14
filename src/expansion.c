@@ -40,7 +40,7 @@ size_t	var_name_len(char const *s) {
 
 char	*replace_key_with_value(char *s, char *value, char *dollar, size_t key_len) {
 	char	*dest = malloc(sizeof(char) * (strlen(s) + 1 - key_len + strlen(value)));
-	char	*end_s = &s[dollar - s + key_len];
+	char	*end_s = &s[dollar + 1 - s + key_len];
 
 	if (!dest) 
 		return (dprintf(2, "%s%s\n", ERR_HD, EXP_FAILED_MALLOC), s);
@@ -55,10 +55,10 @@ char	*replace(char *s, char *dollar, t_kv_list *env) {
 	char	*value;
 	size_t	key_len;
 
-	if (!isalpha(dollar[1]) || dollar[1] != '_')
+	if (!isalpha(dollar[1]) && dollar[1] != '_')
 		return (s);
 	key_len = var_name_len(&dollar[1]);
-	value = get_kv_n_value(env, dollar, key_len);
+	value = get_kv_n_value(env, &dollar[1], key_len);
 	return (replace_key_with_value(s, value, dollar, key_len));
 }
 
