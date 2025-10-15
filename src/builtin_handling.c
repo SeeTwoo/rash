@@ -27,47 +27,36 @@ int	ts_echo(t_node *cmd, t_env *env);
 int	ts_unalias(t_node *cmd, t_env *env);
 int	ts_unset(t_node *cmd, t_env *env);
 
-int	is_builtin(char *name) {
+typedef int	(*t_builtin)(t_node *cmd, t_env *env);
+
+t_builtin	is_builtin(char *name) {
 	if (!name)
-		return (0);
+		return (NULL);
 	if (strcmp(name, "exit") == 0)
-		return (1);
+		return (ts_exit);
 	else if (strcmp(name, "echo") == 0)
-		return (1);
+		return (ts_echo);
 	else if (strcmp(name, "cd") == 0)
-		return (1);
+		return (ts_cd);
 	else if (strcmp(name, "alias") == 0)
-		return (1);
+		return (ts_alias);
 	else if (strcmp(name, "unalias") == 0)
-		return (1);
+		return (ts_unalias);
 	else if (strcmp(name, "env") == 0)
-		return (1);
+		return (ts_env);
 	else if (strcmp(name, "unset") == 0)
-		return (1);
-	return (0);
+		return (ts_unset);
+	return (NULL);
 }
 
-void	exec_builtin(t_node *node, t_env *env) {
+void	exec_builtin(t_builtin func, t_node *node, t_env *env) {
 	int	saved_stdin = dup(STDIN_FILENO);
 	int	saved_stdout = dup(STDOUT_FILENO);
 
 	expand_command(node->command, env->env_list);
 	trim_command(node);
 	setup_redirections(node);
-	if (strcmp(node->command[0], "exit") == 0)
-		ts_exit(node, env);
-	else if (strcmp(node->command[0], "echo") == 0)
-		ts_echo(node, env);
-	else if (strcmp(node->command[0], "cd") == 0)
-		ts_cd(node, env);
-	else if (strcmp(node->command[0], "alias") == 0)
-		ts_alias(node, env);
-	else if (strcmp(node->command[0], "unalias") == 0)
-		ts_unalias(node, env);
-	else if (strcmp(node->command[0], "env") == 0)
-		ts_env(node, env);
-	else if (strcmp(node->command[0], "unset")  == 0)
-		ts_unset(node, env);
+	func(node, env);
 	dup2(saved_stdin, STDIN_FILENO);
 	dup2(saved_stdout, STDOUT_FILENO);
 	close(saved_stdin);

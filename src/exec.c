@@ -21,20 +21,22 @@
 #include "messages.h"
 #include "nodes.h"
 
-void	assign_variable(t_env *env, char *new);
-void	close_every_fd(void);
-char	**list_to_env(t_kv_list *env);
-void	exec_builtin(t_node *node, t_env *env);
-int		expand_command(char **cmd, t_kv_list *env);
-void	free_double_array(char **array);
-void	free_kv_list(t_kv_list*);
-void	free_node_array(t_node **nodes);
-int		get_bin_path(t_node *node, char *path);
-char	*get_kv_value(t_kv_list *list, char *key);
-int		is_builtin(char *name);
-void	print_nodes(t_node **nodes);
-int		setup_redirections(t_node *command);
-int		trim_command(t_node *node);
+typedef int	(*t_builtin)(t_node *cmd, t_env *env);
+
+void		assign_variable(t_env *env, char *new);
+void		close_every_fd(void);
+char		**list_to_env(t_kv_list *env);
+void		exec_builtin(t_builtin func, t_node *node, t_env *env);
+int			expand_command(char **cmd, t_kv_list *env);
+void		free_double_array(char **array);
+void		free_kv_list(t_kv_list*);
+void		free_node_array(t_node **nodes);
+int			get_bin_path(t_node *node, char *path);
+char		*get_kv_value(t_kv_list *list, char *key);
+t_builtin	is_builtin(char *name);
+void		print_nodes(t_node **nodes);
+int			setup_redirections(t_node *command);
+int			trim_command(t_node *node);
 
 //protection of the pipe creation
 static int	get_pipes(t_node **nodes, int command_number) {
@@ -87,15 +89,17 @@ static void	exec_command(t_node *command, t_env *env, t_node **nodes) {
 }
 
 int	exec(t_node **nodes, t_env *env) {
-	int		command_number;
+	int			command_number;
+	t_builtin	func;
 	
 	command_number = 0;
 	while (nodes[command_number])
 		command_number++;
 	get_pipes(nodes, command_number);
 	for (int i = 0; i < command_number; i++) {
-		if (is_builtin(nodes[i]->command[0]))
-			exec_builtin(nodes[i], env);
+		func = is_builtin(nodes[i]->command[0]);
+		if (func)
+			exec_builtin(func, nodes[i], env);
 		else if (strchr(nodes[i]->command[0], '='))
 			assign_variable(env, nodes[i]->command[0]);
 		else if (get_bin_path(nodes[i], get_kv_value(env->env_list, "PATH")) == 0)
