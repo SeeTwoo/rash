@@ -73,7 +73,7 @@ static char *replace_cmd_with_alias(char *old_line, char *alias, size_t cmd_posi
 static char	*search_and_replace_pattern(char *line, size_t cmd_position, t_kv_list *aliases) {
 	char	*alias;
 
-	alias = search_key(line, aliases);
+	alias = search_key(&line[cmd_position], aliases);
 	if (!alias)
 		return (line);
 	return (replace_cmd_with_alias(line, alias, cmd_position));
