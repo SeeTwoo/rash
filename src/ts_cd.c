@@ -16,7 +16,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "kv_list.h"
+#include "env.h"
 #include "messages.h"
 #include "nodes.h"
 
@@ -24,9 +24,9 @@ char		*get_kv_value(t_kv_list *list, char *key);
 t_kv_list	*kv_chr(t_kv_list *list, char *key);
 int			set_kv_value(t_kv_list *node, char *new, size_t name_len);
 
-int	ts_cd(t_node *node, t_kv_list *env) {
-	t_kv_list	*old_pwd = kv_chr(env, "OLDPWD");
-	t_kv_list	*pwd = kv_chr(env, "PWD");
+int	ts_cd(t_node *node, t_env *env) {
+	t_kv_list	*old_pwd = kv_chr(env->env_list, "OLDPWD");
+	t_kv_list	*pwd = kv_chr(env->env_list, "PWD");
 	char		*path;
 	int			len = 0;
 
@@ -35,7 +35,7 @@ int	ts_cd(t_node *node, t_kv_list *env) {
 	if (len > 2)
 		return (dprintf(2, "%s%s : %s\n", ERR_HD, "cd", TOO_MANY), 1);
 	if (len == 1)
-		path = get_kv_value(env, "HOME");
+		path = get_kv_value(env->env_list, "HOME");
 	else if (len == 2 && strcmp("-", node->command[1]) == 0)
 		path = old_pwd->value;
 	else if (len == 2)
