@@ -55,11 +55,16 @@ int	set_kv_value(t_kv_list *node, char *new, size_t name_len) {
 }
 
 t_kv_list	*kv_n_chr(t_kv_list *list, char *key, size_t n) {
+	char	*temp = strndup(key, n);
+
+	if (!temp)
+		return (NULL);
 	while (list) {
-		if (strncmp(list->key, key, n) == 0)
-			return (list);
+		if (strncmp(temp, key, n) == 0)
+			return (free(temp), list);
 		list = list->next;
 	}
+	free(temp);
 	return (NULL);
 }
 
