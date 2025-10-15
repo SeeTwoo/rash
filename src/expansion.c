@@ -37,8 +37,11 @@ size_t	var_name_len(char const *s) {
 		i++;
 	return (i);
 }
-
+///THERE MUST BE A PRETTIER WAY THAN THIS
 char	*replace_key_with_value(char *s, char *value, char *dollar, size_t key_len) {
+	char	*empty = "";
+	if (!value)
+		value = empty;
 	char	*dest = malloc(sizeof(char) * (strlen(s) + 1 - key_len + strlen(value)));
 	char	*end_s = &s[dollar + 1 - s + key_len];
 
@@ -63,7 +66,7 @@ char	*replace(char *s, char *dollar, t_kv_list *env) {
 }
 
 char	*expand_string(char *s, t_kv_list *env) {
-	int		i = 0;;
+	int		i = 0;
 
 	if (!env)
 		return (s);

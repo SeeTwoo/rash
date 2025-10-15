@@ -83,11 +83,16 @@ char	*get_kv_value(t_kv_list *list, char *key) {
 }
 
 char	*get_kv_n_value(t_kv_list *list, char *key, size_t n) {
+	char	*temp = strndup(key, n);
+
+	if (!temp)
+		return (NULL);
 	while (list) {
-		if (strncmp(list->key, key, n) == 0)
-			return (list->value);
+		if (strcmp(list->key, temp) == 0)
+			return (free(temp), list->value);
 		list = list->next;
 	}
+	free(temp);
 	return (NULL);
 }
 
