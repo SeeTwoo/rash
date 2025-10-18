@@ -36,6 +36,5 @@ int	main(int ac, char **av, char **arg_env) {
 }
 
 /*TODO:
- * trouble with env (not instant even with the \n
  * ls -1 src | grep ts_    behaves weirdly
  * */

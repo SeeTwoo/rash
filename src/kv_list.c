@@ -60,7 +60,7 @@ t_kv_list	*kv_n_chr(t_kv_list *list, char *key, size_t n) {
 	if (!temp)
 		return (NULL);
 	while (list) {
-		if (strncmp(temp, key, n) == 0)
+		if (strcmp(temp, list->key) == 0)
 			return (free(temp), list);
 		list = list->next;
 	}
