@@ -33,8 +33,24 @@ t_node	**parse_line(char *line);
 void	print_nodes(t_node **array);
 char	*trim_string(char *s);
 
-int	main_loop(t_env *env) {
+int	process_line(char *line, t_env *env) {
 	t_node		**nodes;
+
+	if (line[0] == '#')
+		return (0);
+	line = aliasing(line, env->aliases);
+	if (!line)
+		return (1);
+	nodes = parse_line(line);
+	if (!nodes)
+		return (1);
+//	print_nodes(nodes);
+	exec(nodes, env);
+	free_node_array(nodes);
+	return (0);
+}
+
+int	main_loop(t_env *env) {
 	char		prompt[256];
 	char		*line;
 
@@ -45,16 +61,8 @@ int	main_loop(t_env *env) {
 		if (!line)
 			return (1);
 		ts_add_hist(line, env->history);
-		line = aliasing(line, env->aliases);
-		if (!line)
-			return (1);
-		nodes = parse_line(line);
+		process_line(line, env);
 		free(line);
-		if (!nodes)
-			continue ;
-//		print_nodes(nodes);
-		exec(nodes, env);
-		free_node_array(nodes);
 	}
 	ts_free_hist(env->history);
 	return (0);
