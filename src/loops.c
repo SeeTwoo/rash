@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,9 +30,19 @@ void	build_prompt(char *prompt, char *format, t_env *env);
 int		exec(t_node **nodes, t_env *env);
 void	free_node_array(t_node **nodes);
 char	*get_kv_value(t_kv_list *list, char *key);
+char	*get_next_line(int fd);
 t_node	**parse_line(char *line);
 void	print_nodes(t_node **array);
 char	*trim_string(char *s);
+
+void	nullifythenewline(char *line) {
+	char	*nl;
+
+	nl = strrchr(line, '\n');
+	if (!nl)
+		return ;
+	*nl = '\0';
+}
 
 int	process_line(char *line, t_env *env) {
 	t_node		**nodes;
@@ -39,18 +50,34 @@ int	process_line(char *line, t_env *env) {
 	if (line[0] == '#')
 		return (0);
 	line = aliasing(line, env->aliases);
-	if (!line)
-		return (1);
 	nodes = parse_line(line);
 	if (!nodes)
 		return (1);
 //	print_nodes(nodes);
 	exec(nodes, env);
 	free_node_array(nodes);
+	free(line);
 	return (0);
 }
 
-int	main_loop(t_env *env) {
+int	script_loop(t_env *env, char *path) {
+	char	*line;
+	int		fd = open(path, O_RDONLY);
+
+	if (fd == -1)
+		return (1);
+	while (1) {
+		line = get_next_line(fd);
+		if (!line)
+			return (1);
+		nullifythenewline(line);
+		process_line(line, env);
+	}
+	close(fd);
+	return (0);
+}
+
+int	interactive_loop(t_env *env) {
 	char		prompt[256];
 	char		*line;
 
@@ -62,7 +89,6 @@ int	main_loop(t_env *env) {
 			return (1);
 		ts_add_hist(line, env->history);
 		process_line(line, env);
-		free(line);
 	}
 	ts_free_hist(env->history);
 	return (0);

@@ -16,7 +16,7 @@
 
 void	exec_config_file(t_env *env);
 int		init_env(t_env *env, char **arg_env);
-void	main_loop(t_env *env);
+void	interactive_loop(t_env *env);
 void	free_double_array(char**);
 void	free_kv_list(t_kv_list*);
 
@@ -29,12 +29,8 @@ int	main(int ac, char **av, char **arg_env) {
 	if (init_env(&env, arg_env) != 0)
 		return (1);
 	exec_config_file(&env);
-	main_loop(&env);
+	interactive_loop(&env);
 	free_kv_list(env.env_list);
 	free_kv_list(env.aliases);
 	return (0);
 }
-
-/*TODO:
- * ls -1 src | grep ts_    behaves weirdly
- * */
