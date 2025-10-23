@@ -1,7 +1,7 @@
 [
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -12,13 +12,13 @@
       "obj/aliasing.o",
       "src/aliasing.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/aliasing.c",
-    "output": "/home/seetwoo/Documents/rash/obj/aliasing.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/aliasing.c",
+    "output": "/home/walter/Documents/rash/obj/aliasing.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -29,13 +29,13 @@
       "obj/assign_variable.o",
       "src/assign_variable.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/assign_variable.c",
-    "output": "/home/seetwoo/Documents/rash/obj/assign_variable.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/assign_variable.c",
+    "output": "/home/walter/Documents/rash/obj/assign_variable.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -46,13 +46,13 @@
       "obj/build_prompt.o",
       "src/build_prompt.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/build_prompt.c",
-    "output": "/home/seetwoo/Documents/rash/obj/build_prompt.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/build_prompt.c",
+    "output": "/home/walter/Documents/rash/obj/build_prompt.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -63,13 +63,13 @@
       "obj/builtin_handling.o",
       "src/builtin_handling.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/builtin_handling.c",
-    "output": "/home/seetwoo/Documents/rash/obj/builtin_handling.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/builtin_handling.c",
+    "output": "/home/walter/Documents/rash/obj/builtin_handling.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -80,13 +80,13 @@
       "obj/cleaning.o",
       "src/cleaning.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/cleaning.c",
-    "output": "/home/seetwoo/Documents/rash/obj/cleaning.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/cleaning.c",
+    "output": "/home/walter/Documents/rash/obj/cleaning.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -97,13 +97,13 @@
       "obj/environment_manipulation.o",
       "src/environment_manipulation.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/environment_manipulation.c",
-    "output": "/home/seetwoo/Documents/rash/obj/environment_manipulation.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/environment_manipulation.c",
+    "output": "/home/walter/Documents/rash/obj/environment_manipulation.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -114,13 +114,13 @@
       "obj/exec.o",
       "src/exec.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/exec.c",
-    "output": "/home/seetwoo/Documents/rash/obj/exec.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/exec.c",
+    "output": "/home/walter/Documents/rash/obj/exec.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -131,13 +131,13 @@
       "obj/exec_config_file.o",
       "src/exec_config_file.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/exec_config_file.c",
-    "output": "/home/seetwoo/Documents/rash/obj/exec_config_file.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/exec_config_file.c",
+    "output": "/home/walter/Documents/rash/obj/exec_config_file.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -145,16 +145,16 @@
       "-Its_readline/includes",
       "-c",
       "-o",
-      "obj/exec_script.o",
-      "src/exec_script.c"
+      "obj/expansion.o",
+      "src/expansion.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/exec_script.c",
-    "output": "/home/seetwoo/Documents/rash/obj/exec_script.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/expansion.c",
+    "output": "/home/walter/Documents/rash/obj/expansion.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -165,13 +165,13 @@
       "obj/get_bin_path.o",
       "src/get_bin_path.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/get_bin_path.c",
-    "output": "/home/seetwoo/Documents/rash/obj/get_bin_path.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/get_bin_path.c",
+    "output": "/home/walter/Documents/rash/obj/get_bin_path.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -182,13 +182,13 @@
       "obj/get_next_line.o",
       "src/get_next_line.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/get_next_line.c",
-    "output": "/home/seetwoo/Documents/rash/obj/get_next_line.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/get_next_line.c",
+    "output": "/home/walter/Documents/rash/obj/get_next_line.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -199,13 +199,13 @@
       "obj/get_paths.o",
       "src/get_paths.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/get_paths.c",
-    "output": "/home/seetwoo/Documents/rash/obj/get_paths.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/get_paths.c",
+    "output": "/home/walter/Documents/rash/obj/get_paths.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -216,13 +216,13 @@
       "obj/get_redirections.o",
       "src/get_redirections.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/get_redirections.c",
-    "output": "/home/seetwoo/Documents/rash/obj/get_redirections.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/get_redirections.c",
+    "output": "/home/walter/Documents/rash/obj/get_redirections.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -233,13 +233,13 @@
       "obj/heredoc.o",
       "src/heredoc.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/heredoc.c",
-    "output": "/home/seetwoo/Documents/rash/obj/heredoc.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/heredoc.c",
+    "output": "/home/walter/Documents/rash/obj/heredoc.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -250,13 +250,13 @@
       "obj/init_env.o",
       "src/init_env.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/init_env.c",
-    "output": "/home/seetwoo/Documents/rash/obj/init_env.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/init_env.c",
+    "output": "/home/walter/Documents/rash/obj/init_env.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -267,13 +267,13 @@
       "obj/is_token_type.o",
       "src/is_token_type.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/is_token_type.c",
-    "output": "/home/seetwoo/Documents/rash/obj/is_token_type.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/is_token_type.c",
+    "output": "/home/walter/Documents/rash/obj/is_token_type.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -284,13 +284,13 @@
       "obj/kv_list.o",
       "src/kv_list.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/kv_list.c",
-    "output": "/home/seetwoo/Documents/rash/obj/kv_list.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/kv_list.c",
+    "output": "/home/walter/Documents/rash/obj/kv_list.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -301,13 +301,13 @@
       "obj/lexer.o",
       "src/lexer.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/lexer.c",
-    "output": "/home/seetwoo/Documents/rash/obj/lexer.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/lexer.c",
+    "output": "/home/walter/Documents/rash/obj/lexer.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -318,13 +318,30 @@
       "obj/list_to_array.o",
       "src/list_to_array.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/list_to_array.c",
-    "output": "/home/seetwoo/Documents/rash/obj/list_to_array.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/list_to_array.c",
+    "output": "/home/walter/Documents/rash/obj/list_to_array.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iincludes",
+      "-Its_readline/includes",
+      "-c",
+      "-o",
+      "obj/loops.o",
+      "src/loops.c"
+    ],
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/loops.c",
+    "output": "/home/walter/Documents/rash/obj/loops.o"
+  },
+  {
+    "arguments": [
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -335,30 +352,13 @@
       "obj/main.o",
       "src/main.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/main.c",
-    "output": "/home/seetwoo/Documents/rash/obj/main.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/main.c",
+    "output": "/home/walter/Documents/rash/obj/main.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-Iincludes",
-      "-Its_readline/includes",
-      "-c",
-      "-o",
-      "obj/main_loop.o",
-      "src/main_loop.c"
-    ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/main_loop.c",
-    "output": "/home/seetwoo/Documents/rash/obj/main_loop.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -369,13 +369,13 @@
       "obj/parser.o",
       "src/parser.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/parser.c",
-    "output": "/home/seetwoo/Documents/rash/obj/parser.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/parser.c",
+    "output": "/home/walter/Documents/rash/obj/parser.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -386,13 +386,13 @@
       "obj/parsing.o",
       "src/parsing.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/parsing.c",
-    "output": "/home/seetwoo/Documents/rash/obj/parsing.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/parsing.c",
+    "output": "/home/walter/Documents/rash/obj/parsing.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -403,13 +403,13 @@
       "obj/print_nodes.o",
       "src/print_nodes.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/print_nodes.c",
-    "output": "/home/seetwoo/Documents/rash/obj/print_nodes.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/print_nodes.c",
+    "output": "/home/walter/Documents/rash/obj/print_nodes.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -420,13 +420,13 @@
       "obj/separator_token.o",
       "src/separator_token.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/separator_token.c",
-    "output": "/home/seetwoo/Documents/rash/obj/separator_token.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/separator_token.c",
+    "output": "/home/walter/Documents/rash/obj/separator_token.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -437,13 +437,13 @@
       "obj/set_token_types.o",
       "src/set_token_types.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/set_token_types.c",
-    "output": "/home/seetwoo/Documents/rash/obj/set_token_types.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/set_token_types.c",
+    "output": "/home/walter/Documents/rash/obj/set_token_types.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -454,13 +454,13 @@
       "obj/setup_redirections.o",
       "src/setup_redirections.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/setup_redirections.c",
-    "output": "/home/seetwoo/Documents/rash/obj/setup_redirections.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/setup_redirections.c",
+    "output": "/home/walter/Documents/rash/obj/setup_redirections.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -471,13 +471,13 @@
       "obj/syntax.o",
       "src/syntax.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/syntax.c",
-    "output": "/home/seetwoo/Documents/rash/obj/syntax.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/syntax.c",
+    "output": "/home/walter/Documents/rash/obj/syntax.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -488,13 +488,13 @@
       "obj/tok_to_args.o",
       "src/tok_to_args.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/tok_to_args.c",
-    "output": "/home/seetwoo/Documents/rash/obj/tok_to_args.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/tok_to_args.c",
+    "output": "/home/walter/Documents/rash/obj/tok_to_args.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -505,13 +505,13 @@
       "obj/trim_command.o",
       "src/trim_command.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/trim_command.c",
-    "output": "/home/seetwoo/Documents/rash/obj/trim_command.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/trim_command.c",
+    "output": "/home/walter/Documents/rash/obj/trim_command.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -522,13 +522,13 @@
       "obj/ts_alias.o",
       "src/ts_alias.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/ts_alias.c",
-    "output": "/home/seetwoo/Documents/rash/obj/ts_alias.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_alias.c",
+    "output": "/home/walter/Documents/rash/obj/ts_alias.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -539,13 +539,13 @@
       "obj/ts_cd.o",
       "src/ts_cd.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/ts_cd.c",
-    "output": "/home/seetwoo/Documents/rash/obj/ts_cd.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_cd.c",
+    "output": "/home/walter/Documents/rash/obj/ts_cd.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -556,13 +556,13 @@
       "obj/ts_echo.o",
       "src/ts_echo.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/ts_echo.c",
-    "output": "/home/seetwoo/Documents/rash/obj/ts_echo.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_echo.c",
+    "output": "/home/walter/Documents/rash/obj/ts_echo.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -573,13 +573,13 @@
       "obj/ts_env.o",
       "src/ts_env.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/ts_env.c",
-    "output": "/home/seetwoo/Documents/rash/obj/ts_env.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_env.c",
+    "output": "/home/walter/Documents/rash/obj/ts_env.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -590,13 +590,13 @@
       "obj/ts_exit.o",
       "src/ts_exit.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/ts_exit.c",
-    "output": "/home/seetwoo/Documents/rash/obj/ts_exit.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_exit.c",
+    "output": "/home/walter/Documents/rash/obj/ts_exit.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -607,13 +607,30 @@
       "obj/ts_unalias.o",
       "src/ts_unalias.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/ts_unalias.c",
-    "output": "/home/seetwoo/Documents/rash/obj/ts_unalias.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_unalias.c",
+    "output": "/home/walter/Documents/rash/obj/ts_unalias.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/sbin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iincludes",
+      "-Its_readline/includes",
+      "-c",
+      "-o",
+      "obj/ts_unset.o",
+      "src/ts_unset.c"
+    ],
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/ts_unset.c",
+    "output": "/home/walter/Documents/rash/obj/ts_unset.o"
+  },
+  {
+    "arguments": [
+      "/usr/sbin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -624,8 +641,8 @@
       "obj/word_token.o",
       "src/word_token.c"
     ],
-    "directory": "/home/seetwoo/Documents/rash",
-    "file": "/home/seetwoo/Documents/rash/src/word_token.c",
-    "output": "/home/seetwoo/Documents/rash/obj/word_token.o"
+    "directory": "/home/walter/Documents/rash",
+    "file": "/home/walter/Documents/rash/src/word_token.c",
+    "output": "/home/walter/Documents/rash/obj/word_token.o"
   }
 ]

@@ -19,6 +19,7 @@
 #include "kv_list.h"
 #include "nodes.h"
 #include "env.h"
+#include "messages.h"
 
 int		script_loop(t_env *env, char *path);
 
@@ -28,6 +29,10 @@ void	exec_config_file(t_env *env) {
 	size_t		home_len;
 
 	home = get_kv_value(env->env_list, "HOME");
+	if (!home) {
+		dprintf(2, "%s%s\n", WARN_HD, NO_HOME_VAR_RC);
+		return ;
+	}
 	home_len = strlen(home);
 	memcpy(config_path, home, home_len);
 	config_path[home_len] = '/';

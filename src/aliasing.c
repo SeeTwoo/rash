@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "env.h"
+#include "messages.h"
 
 static size_t	skip_whitespaces(char *line) {
 	size_t	i;
@@ -46,7 +47,7 @@ static char *replace(char *old_line, char *current, char *alias, size_t key_len)
 	alias_len = strlen(alias);
 	line = malloc(sizeof(char) * (strlen(old_line) - key_len + alias_len + 1));
 	if (!line) {
-		dprintf(2, "ts: Warning: an alias was not applied, malloc failed\n");
+		dprintf(2, "%s%s\n", WARN_HD, NOT_ALIASED);
 		return (old_line);
 	}
 	first_half_len = current - old_line;

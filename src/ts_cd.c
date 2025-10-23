@@ -20,10 +20,6 @@
 #include "messages.h"
 #include "nodes.h"
 
-char		*get_kv_value(t_kv_list *list, char *key);
-t_kv_list	*kv_chr(t_kv_list *list, char *key);
-int			set_kv_value(t_kv_list *node, char *new, size_t name_len);
-
 int	array_len(char **array) {
 	int	i = 0;
 
@@ -31,13 +27,22 @@ int	array_len(char **array) {
 		i++;
 	return (i);
 }
+
 char	*get_destination(t_node *node, t_kv_list *list, int ac) {
-	if (ac == 1)
-		return (get_kv_value(list, "HOME"));
-	else if (ac == 2 && strcmp("-", node->command[1]) == 0)
-		return ((kv_chr(list, "OLDPWD"))->value);
-	else
-		return (node->command[1]);
+	char	*destination;
+
+	if (ac == 1) {
+		destination = get_kv_value(list, "HOME");
+		if (!destination)
+			dprintf(2, "%s%s\n", WARN_HD, HOME_NOT_SET);
+	} else if (ac == 2 && strcmp("-", node->command[1]) == 0) {
+		destination = get_kv_value(list, "OLDPWD");
+		if (!destination)
+			dprintf(2, "%s%s\n", WARN_HD, OLDPWD_NOT_SET);
+	} else {
+		destination = node->command[1];
+	}
+	return (destination);
 }
 
 int	ts_cd(t_node *node, t_env *env) {

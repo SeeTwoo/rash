@@ -14,7 +14,6 @@ SRC_FILES = aliasing.c \
 			expansion.c \
 			get_bin_path.c \
 			get_next_line.c \
-			get_paths.c \
 			get_redirections.c \
 			heredoc.c \
 			init_env.c \
