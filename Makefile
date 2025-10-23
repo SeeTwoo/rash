@@ -1,4 +1,4 @@
-NAME = train_shell 
+NAME = rail_shell 
 CC = cc -Wall -Wextra -Werror -Iincludes -Its_readline/includes
 CCDEBUG = $(CC) -g3 -O0
 

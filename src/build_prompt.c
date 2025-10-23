@@ -16,13 +16,13 @@
 
 #include "env.h"
 
-char	*get_kv_value(t_kv_list *list, char *key);
-
 static char	*get_wd(t_kv_list *env) {
 	char	*last_slash;
 	char	*wd;
 
 	wd = get_kv_value(env, "PWD");
+	if (!wd)
+		return (NULL);
 	last_slash = wd;
 	while (*wd) {
 		if (*wd == '/')
@@ -59,6 +59,8 @@ static void fill_prompt(char *prompt, char *format, t_env *env) {
  		} else {
 			format++;
 			bit = get_bit(format, env);
+			if (!bit)
+				continue ;
 			bit_len = strlen(bit);
 			memcpy(&prompt[total_len], bit, bit_len);
 			total_len += bit_len;

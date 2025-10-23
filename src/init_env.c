@@ -23,7 +23,7 @@ static t_kv_list *env_to_list(char **env) {
 	t_kv_list	*head;
 	t_kv_list	*tail;
 
-	int		i = 0;
+///	int		i = 0;
 
 	if (!(*env))
 		return (NULL);
@@ -33,15 +33,15 @@ static t_kv_list *env_to_list(char **env) {
 	tail = head;
 	env++;
 	while (*env) {
-		if (i >= 4)
-			tail->next = NULL;
-		else
-			tail->next = new_kv_node(*env);
+//		if (i >= 4)
+//			tail->next = NULL;
+//		else
+		tail->next = new_kv_node(*env);
 		if (!(tail->next))
 			return (dprintf(2, "%s%s\n", WARN_HD, NO_ENV), head);
 		tail = tail->next;
 		env++;
-		i++;
+	//	i++;
 	}
 	return (head);
 }

@@ -29,11 +29,9 @@ char	*aliasing(char *line, t_kv_list *aliases);
 void	build_prompt(char *prompt, char *format, t_env *env);
 int		exec(t_node **nodes, t_env *env);
 void	free_node_array(t_node **nodes);
-char	*get_kv_value(t_kv_list *list, char *key);
 char	*get_next_line(int fd);
 t_node	**parse_line(char *line);
 void	print_nodes(t_node **array);
-char	*trim_string(char *s);
 
 void	nullifythenewline(char *line) {
 	char	*nl;
@@ -49,15 +47,22 @@ int	process_line(char *line, t_env *env) {
 
 	if (line[0] == '#')
 		return (0);
-	line = aliasing(line, env->aliases);
 	nodes = parse_line(line);
 	if (!nodes)
 		return (1);
 //	print_nodes(nodes);
 	exec(nodes, env);
 	free_node_array(nodes);
-	free(line);
 	return (0);
+}
+
+char	*get_script_line(int fd, t_env *env) {
+	char	*line = get_next_line(fd);
+
+	if (!line)
+		return NULL;
+	nullifythenewline(line);
+	return (aliasing(line, env->aliases));
 }
 
 int	script_loop(t_env *env, char *path) {
@@ -67,14 +72,23 @@ int	script_loop(t_env *env, char *path) {
 	if (fd == -1)
 		return (1);
 	while (1) {
-		line = get_next_line(fd);
+		line = get_script_line(fd, env);
 		if (!line)
 			return (1);
-		nullifythenewline(line);
 		process_line(line, env);
+		free(line);
 	}
 	close(fd);
 	return (0);
+}
+
+char	*get_interactive_line(char *prompt, t_env *env) {
+	char	*line = ts_readline(prompt, env->history);
+
+	if (!line)
+		return NULL;
+	ts_add_hist(line, env->history);
+	return (aliasing(line, env->aliases));
 }
 
 int	interactive_loop(t_env *env) {
@@ -84,11 +98,11 @@ int	interactive_loop(t_env *env) {
 	env->history = ts_init_hist();
 	while (!env->should_exit) {
 		build_prompt(prompt, get_kv_value(env->env_list, "PS1"), env);
-		line = ts_readline(prompt, env->history);
+		line = get_interactive_line(prompt, env);
 		if (!line)
-			return (1);
-		ts_add_hist(line, env->history);
+			continue ;
 		process_line(line, env);
+		free(line);
 	}
 	ts_free_hist(env->history);
 	return (0);
