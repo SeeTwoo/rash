@@ -74,7 +74,7 @@ int	script_loop(t_env *env, char *path) {
 	while (1) {
 		line = get_script_line(fd, env);
 		if (!line)
-			return (1);
+			return (close(fd), 1);
 		process_line(line, env);
 		free(line);
 	}
