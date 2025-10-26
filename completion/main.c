@@ -58,6 +58,7 @@ int	main(int ac, char **av) {
 	if (ac != 2)
 		return (1);
 	char	*match;
+
 	match = find_match(av[1]);
 	if (!match)
 		return (printf("\x1b[1;31m no match ! \x1b[0m\n"), 1);
