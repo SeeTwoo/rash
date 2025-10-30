@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         :::     ::::::::   */
-/*   ts_add_hist.c                                       :+:     :+:    :+:   */
+/*   ts_readline.h                                       :+:     :+:    :+:   */
 /*                                                     +:+ +:+        +:+     */
 /*   By: seetwoo <marvin@42students.fr>              +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
@@ -10,32 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#ifndef TSHOO_LINE_H 
+# define TSHOO_LINE_H 
 
-#include "ts_readline.h"
-#include "ts_hist.h"
+typedef struct s_tshoo_hist	t_tshoo_hist;
 
-t_ts_hist	*new_hist_node(char *line, t_ts_hist *prev, t_ts_hist *next) {
-	t_ts_hist	*new;
+char		*tshoo_line(char *prompt, t_tshoo_hist *history);
 
-	new = malloc(sizeof(t_ts_hist));
-	if (!new)
-		return (NULL);
-	new->prev = prev;
-	new->next = next;
-	new->line = strdup(line);
-	if (!new->line)
-		return (free(new), NULL);
-	return (new);
-}
+int			tshoo_add_hist(char *line, t_tshoo_hist *history);
+void		tshoo_free_hist(t_tshoo_hist *history);
+t_tshoo_hist	*tshoo_init_hist(void);
 
-int	ts_add_hist(char *line, t_ts_hist *history) {
-	history->prev = new_hist_node(line, history->prev, history);
-	if (!history->prev)
-		dprintf(2, "Couldn't add the line [ %s ] to the history, malloc failed\n", line);
-	if (history->prev->prev)
-		history->prev->prev->next = history->prev;
-	return (0);
-}
+#endif

@@ -56,7 +56,7 @@ static int	get_pipes(t_node **nodes, int command_number) {
 
 static void	clean_child_process(t_node **nodes, t_env *env) {
 	free_node_array(nodes);
-	ts_free_hist(env->history);
+	tshoo_free_hist(env->history);
 	free_kv_list(env->aliases);
 	free_kv_list(env->env_list);
 	close_every_fd();

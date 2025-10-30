@@ -19,7 +19,7 @@
 #include "nodes.h"
 #include "env.h"
 
-#include "ts_readline.h"
+#include "tshoo_line.h"
 
 #ifndef PROMPT
 # define PROMPT "\x1b[1;32m\x1b[?2004ltrain> \x1b[0m"
@@ -99,11 +99,11 @@ int	script_loop(t_env *env, char *path) {
 }
 
 char	*get_interactive_line(char *prompt, t_env *env) {
-	char	*line = ts_readline(prompt, env->history);
+	char	*line = tshoo_line(prompt, env->history);
 
 	if (!line)
 		return NULL;
-	ts_add_hist(line, env->history);
+	tshoo_add_hist(line, env->history);
 	return (aliasing(line, env->aliases));
 }
 
@@ -111,7 +111,7 @@ int	interactive_loop(t_env *env) {
 	char		prompt[256];
 	char		*line;
 
-	env->history = ts_init_hist();
+	env->history = tshoo_init_hist();
 	while (!env->should_exit) {
 		build_prompt(prompt, get_kv_value(env->env_list, "PS1"), env);
 		line = get_interactive_line(prompt, env);
@@ -120,6 +120,6 @@ int	interactive_loop(t_env *env) {
 		process_line(line, env);
 		free(line);
 	}
-	ts_free_hist(env->history);
+	tshoo_free_hist(env->history);
 	return (0);
 }

@@ -1,5 +1,5 @@
-NAME = rail_shell 
-CC = cc -Wall -Wextra -Werror -Iincludes -Its_readline/includes
+NAME = tshoo 
+CC = cc -Wall -Wextra -Werror -Iincludes
 CCDEBUG = $(CC) -g3 -O0
 
 SRC_DIR = src
@@ -51,7 +51,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ ts_readline.a
+	$(CC) -o $@ $^ tshoo_line.a
 
 $(OBJ): | $(OBJ_DIR)
 
