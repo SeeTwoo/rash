@@ -15,15 +15,11 @@
 
 #include "env.h"
 
-<<<<<<< HEAD
-t_kv_list	*new_kv_node(char *new);
-=======
 struct s_key_value {
 	char		*key;
 	char		*value;
 	t_key_value	*next;
 };
->>>>>>> e48c020 (done including the key_value separate library for environment and aliases)
 
 static t_kv_list *env_to_list(char **env) {
 	t_kv_list	*head;

@@ -20,11 +20,6 @@
 #include "messages.h"
 #include "nodes.h"
 
-<<<<<<< HEAD
-char		*get_kv_value(t_kv_list *list, char *key);
-t_kv_list	*kv_chr(t_kv_list *list, char *key);
-int			set_kv_value(t_kv_list *node, char *new, size_t name_len);
-=======
 struct s_key_value {
 	char		*key;
 	char		*value;
@@ -55,7 +50,6 @@ char	*get_destination(t_node *node, t_key_value *list, int ac) {
 	}
 	return (destination);
 }
->>>>>>> e48c020 (done including the key_value separate library for environment and aliases)
 
 int	ts_cd(t_node *node, t_env *env) {
 	t_kv_list	*old_pwd = kv_chr(env->env_list, "OLDPWD");
