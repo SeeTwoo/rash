@@ -53,7 +53,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ ts_readline.a
+	$(CC) -o $@ $^ libs/key_value.a libs/tshoo_line.a
 
 $(OBJ): | $(OBJ_DIR)
 

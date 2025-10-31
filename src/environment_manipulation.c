@@ -15,6 +15,7 @@
 #include <stdio.h>
 
 #include "env.h"
+<<<<<<< HEAD
 #include "kv_list.h"
 
 static size_t	listlen(t_kv_list *list) {
@@ -27,6 +28,8 @@ static size_t	listlen(t_kv_list *list) {
 	}
 	return (i);
 }
+=======
+>>>>>>> e48c020 (done including the key_value separate library for environment and aliases)
 
 static char	*build_env_line(char *key, char *value) {
 	size_t	key_len = strlen(key);
@@ -40,15 +43,20 @@ static char	*build_env_line(char *key, char *value) {
 	return (dest);
 }
 
+<<<<<<< HEAD
 char	**list_to_env(t_kv_list *list) {
 	char	**dest = malloc(sizeof(char *) * (listlen(list) + 1));
+=======
+char	**list_to_env(t_key_value *list) {
+	char	**dest = malloc(sizeof(char *) * (kv_list_len(list) + 1));
+>>>>>>> e48c020 (done including the key_value separate library for environment and aliases)
 	size_t	i = 0;
 	
 	if (!dest)
 		return (NULL);
 	while (list) {
-		dest[i] = build_env_line(list->key, list->value);
-		list = list->next;
+		dest[i] = build_env_line(get_key(list), get_value(list));
+		list = get_next(list);
 		i++;
 	}
 	dest[i] = NULL;

@@ -20,8 +20,8 @@ int	ts_env(t_node *cmd, t_env *env) {
 
 	(void)cmd;
 	while (list) {
-		printf("%s=%s\n", list->key, list->value);
-		list = list->next;
+		printf("%s=%s\n",get_key(list), get_value(list));
+		list = get_next(list);
 	}
 	fflush(stdout);
 	return (0);

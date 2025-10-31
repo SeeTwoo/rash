@@ -20,9 +20,42 @@
 #include "messages.h"
 #include "nodes.h"
 
+<<<<<<< HEAD
 char		*get_kv_value(t_kv_list *list, char *key);
 t_kv_list	*kv_chr(t_kv_list *list, char *key);
 int			set_kv_value(t_kv_list *node, char *new, size_t name_len);
+=======
+struct s_key_value {
+	char		*key;
+	char		*value;
+	t_key_value *next;
+};
+
+int	array_len(char **array) {
+	int	i = 0;
+
+	while (array[i])
+		i++;
+	return (i);
+}
+
+char	*get_destination(t_node *node, t_key_value *list, int ac) {
+	char	*destination;
+
+	if (ac == 1) {
+		destination = get_kv_value(list, "HOME");
+		if (!destination)
+			dprintf(2, "%s%s\n", WARN_HD, HOME_NOT_SET);
+	} else if (ac == 2 && strcmp("-", node->command[1]) == 0) {
+		destination = get_kv_value(list, "OLDPWD");
+		if (!destination)
+			dprintf(2, "%s%s\n", WARN_HD, OLDPWD_NOT_SET);
+	} else {
+		destination = node->command[1];
+	}
+	return (destination);
+}
+>>>>>>> e48c020 (done including the key_value separate library for environment and aliases)
 
 int	ts_cd(t_node *node, t_env *env) {
 	t_kv_list	*old_pwd = kv_chr(env->env_list, "OLDPWD");
