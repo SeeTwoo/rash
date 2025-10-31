@@ -25,7 +25,7 @@
 # define PROMPT "\x1b[1;32m\x1b[?2004ltrain> \x1b[0m"
 #endif
 
-char	*aliasing(char *line, t_kv_list *aliases);
+char	*aliasing(char *line, t_key_value *aliases);
 void	build_prompt(char *prompt, char *format, t_env *env);
 int		exec(t_node **nodes, t_env *env);
 void	free_node_array(t_node **nodes);

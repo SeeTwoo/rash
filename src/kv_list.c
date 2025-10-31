@@ -14,10 +14,10 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "kv_list.h"
+#include "key_value.h"
 
-t_kv_list	*new_kv_node(char *new_kv) {
-	t_kv_list	*new = malloc(sizeof(t_kv_list));;
+t_key_value	*new_kv_node(char *new_kv) {
+	t_key_value	*new = malloc(sizeof(t_key_value));;
 	size_t		len;
 
 	if (!new)
@@ -31,8 +31,8 @@ t_kv_list	*new_kv_node(char *new_kv) {
 	return (new);
 }
 
-void	add_kv_back(t_kv_list **list, t_kv_list *new) {
-	t_kv_list	*temp;
+void	add_kv_back(t_key_value **list, t_key_value *new) {
+	t_key_value	*temp;
 
 	if (!(*list)) {
 		*list = new;
@@ -44,7 +44,7 @@ void	add_kv_back(t_kv_list **list, t_kv_list *new) {
 	temp->next = new;
 }
 
-int	set_kv_value(t_kv_list *node, char *new, size_t name_len) {
+int	set_kv_value(t_key_value *node, char *new, size_t name_len) {
 	char	*new_value = strdup(&new[name_len + 1]);
 
 	if (!new_value)
@@ -54,7 +54,7 @@ int	set_kv_value(t_kv_list *node, char *new, size_t name_len) {
 	return (0);
 }
 
-t_kv_list	*kv_n_chr(t_kv_list *list, char *key, size_t n) {
+t_key_value	*kv_n_chr(t_key_value *list, char *key, size_t n) {
 	char	*temp = strndup(key, n);
 
 	if (!temp)
@@ -68,8 +68,8 @@ t_kv_list	*kv_n_chr(t_kv_list *list, char *key, size_t n) {
 	return (NULL);
 }
 
-void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len) {
-	t_kv_list	*to_modify;
+void	modify_kv_list(t_key_value **kv, char *new, ssize_t key_len) {
+	t_key_value	*to_modify;
 
 	to_modify = kv_n_chr(*kv, new, key_len);
 	if (to_modify)
@@ -78,7 +78,7 @@ void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len) {
 		add_kv_back(kv, new_kv_node(new));
 }
 
-char	*get_kv_value(t_kv_list *list, char *key) {
+char	*get_kv_value(t_key_value *list, char *key) {
 	while (list) {
 		if (strcmp(list->key, key) == 0)
 			return (list->value);
@@ -87,7 +87,7 @@ char	*get_kv_value(t_kv_list *list, char *key) {
 	return (NULL);
 }
 
-char	*get_kv_n_value(t_kv_list *list, char *key, size_t n) {
+char	*get_kv_n_value(t_key_value *list, char *key, size_t n) {
 	char	*temp = strndup(key, n);
 
 	if (!temp)
@@ -101,7 +101,7 @@ char	*get_kv_n_value(t_kv_list *list, char *key, size_t n) {
 	return (NULL);
 }
 
-t_kv_list	*kv_chr(t_kv_list *list, char *key) {
+t_key_value	*kv_chr(t_key_value *list, char *key) {
 	while (list) {
 		if (strcmp(list->key, key) == 0)
 			return (list);
@@ -110,14 +110,14 @@ t_kv_list	*kv_chr(t_kv_list *list, char *key) {
 	return (NULL);
 }
 
-void	free_kv_node(t_kv_list *node) {
+void	free_kv_node(t_key_value *node) {
 	free(node->key);
 	free(node->value);
 	free(node);
 }
 
-void	free_kv_list(t_kv_list *list) {
-	t_kv_list	*temp;
+void	free_kv_list(t_key_value *list) {
+	t_key_value	*temp;
 
 	while (list) {
 		temp = list;
@@ -126,10 +126,10 @@ void	free_kv_list(t_kv_list *list) {
 	}
 }
 
-void	delete_kv_node(t_kv_list **list, char *key) {
-	t_kv_list	**prev = list;
-	t_kv_list	*temp = *list;
-	t_kv_list	*to_delete = NULL;
+void	delete_kv_node(t_key_value **list, char *key) {
+	t_key_value	**prev = list;
+	t_key_value	*temp = *list;
+	t_key_value	*to_delete = NULL;
 
 	while (temp) {
 		if (strcmp(temp->key, key) == 0) {

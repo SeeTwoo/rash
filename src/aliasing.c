@@ -59,7 +59,7 @@ static char *replace(char *old_line, char *current, char *alias, size_t key_len)
 	return (line);
 }
 
-static char	*search_and_replace(char *line, char *current, t_kv_list *aliases) {
+static char	*search_and_replace(char *line, char *current, t_key_value *aliases) {
 	char	*alias;
 	size_t	key_len;
 
@@ -70,7 +70,7 @@ static char	*search_and_replace(char *line, char *current, t_kv_list *aliases) {
 	return (replace(line, current, alias, key_len));
 }
 
-char	*aliasing(char *line, t_kv_list *aliases) {
+char	*aliasing(char *line, t_key_value *aliases) {
 	size_t	current;
 
 	if (!aliases)

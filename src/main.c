@@ -18,7 +18,7 @@ void	exec_config_file(t_env *env);
 int		init_env(t_env *env, char **arg_env);
 void	interactive_loop(t_env *env);
 void	free_double_array(char**);
-void	free_kv_list(t_kv_list*);
+void	free_kv_list(t_key_value*);
 
 int	main(int ac, char **av, char **arg_env) {
 	t_env	env;

@@ -17,7 +17,7 @@
 #include "env.h"
 #include "messages.h"
 
-void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len);
+void	modify_kv_list(t_key_value **kv, char *new, ssize_t key_len);
 
 static ssize_t	is_valid_variable(char *new) {
 	ssize_t	key_len;

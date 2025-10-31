@@ -16,7 +16,7 @@
 #include "env.h"
 #include "nodes.h"
 
-int	expand_command(char **cmd, t_kv_list *env);
+int	expand_command(char **cmd, t_key_value *env);
 int	setup_redirections(t_node *node);
 int	trim_command(t_node *node);
 int	ts_alias(t_node *cmd, t_env *env);

@@ -16,7 +16,7 @@
 
 #include "env.h"
 
-static char	*get_wd(t_kv_list *env) {
+static char	*get_wd(t_key_value *env) {
 	char	*last_slash;
 	char	*wd;
 

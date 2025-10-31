@@ -18,7 +18,6 @@ SRC_FILES = aliasing.c \
 			heredoc.c \
 			init_env.c \
 			is_token_type.c \
-			kv_list.c \
 			lexer.c \
 			list_to_array.c \
 			loops.c \
@@ -51,7 +50,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ tshoo_line.a
+	$(CC) -o $@ $^ -llibs 
 
 $(OBJ): | $(OBJ_DIR)
 

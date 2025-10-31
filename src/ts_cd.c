@@ -28,7 +28,7 @@ int	array_len(char **array) {
 	return (i);
 }
 
-char	*get_destination(t_node *node, t_kv_list *list, int ac) {
+char	*get_destination(t_node *node, t_key_value *list, int ac) {
 	char	*destination;
 
 	if (ac == 1) {
@@ -46,8 +46,8 @@ char	*get_destination(t_node *node, t_kv_list *list, int ac) {
 }
 
 int	ts_cd(t_node *node, t_env *env) {
-	t_kv_list	*old_pwd = kv_chr(env->env_list, "OLDPWD");
-	t_kv_list	*pwd = kv_chr(env->env_list, "PWD");
+	t_key_value	*old_pwd = kv_chr(env->env_list, "OLDPWD");
+	t_key_value	*pwd = kv_chr(env->env_list, "PWD");
 	char		*path;
 	int			ac = array_len(node->command);
 

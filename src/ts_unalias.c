@@ -17,8 +17,8 @@
 #include "messages.h"
 #include "nodes.h"
 
-void	free_kv_list(t_kv_list *list);
-void	delete_kv_node(t_kv_list **list, char *key);
+void	free_kv_list(t_key_value *list);
+void	delete_kv_node(t_key_value **list, char *key);
 
 static void	delete_all_aliases(t_env *env) {
 	free_kv_list(env->aliases);
