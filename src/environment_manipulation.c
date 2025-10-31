@@ -15,18 +15,6 @@
 #include <stdio.h>
 
 #include "env.h"
-#include "key_value.h"
-
-static size_t	listlen(t_key_value *list) {
-	size_t	i;
-
-	i = 0;
-	while (list) {
-		list = list->next;
-		i++;
-	}
-	return (i);
-}
 
 static char	*build_env_line(char *key, char *value) {
 	size_t	key_len = strlen(key);
@@ -41,14 +29,14 @@ static char	*build_env_line(char *key, char *value) {
 }
 
 char	**list_to_env(t_key_value *list) {
-	char	**dest = malloc(sizeof(char *) * (listlen(list) + 1));
+	char	**dest = malloc(sizeof(char *) * (kv_list_len(list) + 1));
 	size_t	i = 0;
 	
 	if (!dest)
 		return (NULL);
 	while (list) {
-		dest[i] = build_env_line(list->key, list->value);
-		list = list->next;
+		dest[i] = build_env_line(get_key(list), get_value(list));
+		list = get_next(list);
 		i++;
 	}
 	dest[i] = NULL;

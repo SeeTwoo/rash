@@ -17,7 +17,11 @@
 #include "env.h"
 #include "messages.h"
 
-t_key_value	*new_kv_node(char *new);
+struct s_key_value {
+	char		*key;
+	char		*value;
+	t_key_value	*next;
+};
 
 static t_key_value *env_to_list(char **env) {
 	t_key_value	*head;

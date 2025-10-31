@@ -20,6 +20,12 @@
 #include "messages.h"
 #include "nodes.h"
 
+struct s_key_value {
+	char		*key;
+	char		*value;
+	t_key_value *next;
+};
+
 int	array_len(char **array) {
 	int	i = 0;
 
