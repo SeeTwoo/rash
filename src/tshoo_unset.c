@@ -16,9 +16,7 @@
 #include "env.h"
 #include "nodes.h"
 
-void	delete_kv_node(t_key_value **list, char *key);
-
-int	ts_unset(t_node *cmd, t_env *env) {
+int	tshoo_unset(t_node *cmd, t_env *env) {
 	if (!cmd->command[1])
 		return (1);
 	for (int i = 1; cmd->command[i]; i++) {

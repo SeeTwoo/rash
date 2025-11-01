@@ -16,7 +16,7 @@
 #include "env.h"
 #include "nodes.h"
 
-int	ts_exit(t_node *cmd, t_env *env) {
+int	tshoo_exit(t_node *cmd, t_env *env) {
 	(void)cmd;
 	env->should_exit = true;
 	return (0);

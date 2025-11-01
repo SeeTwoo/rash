@@ -456,12 +456,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_alias.o",
-      "src/ts_alias.c"
+      "obj/tshoo_alias.o",
+      "src/tshoo_alias.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_alias.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_alias.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_alias.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_alias.o"
   },
   {
     "arguments": [
@@ -472,12 +472,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_cd.o",
-      "src/ts_cd.c"
+      "obj/tshoo_cd.o",
+      "src/tshoo_cd.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_cd.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_cd.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_cd.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_cd.o"
   },
   {
     "arguments": [
@@ -488,12 +488,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_echo.o",
-      "src/ts_echo.c"
+      "obj/tshoo_echo.o",
+      "src/tshoo_echo.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_echo.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_echo.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_echo.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_echo.o"
   },
   {
     "arguments": [
@@ -504,12 +504,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_env.o",
-      "src/ts_env.c"
+      "obj/tshoo_env.o",
+      "src/tshoo_env.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_env.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_env.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_env.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_env.o"
   },
   {
     "arguments": [
@@ -520,12 +520,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_exit.o",
-      "src/ts_exit.c"
+      "obj/tshoo_exit.o",
+      "src/tshoo_exit.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_exit.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_exit.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_exit.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_exit.o"
   },
   {
     "arguments": [
@@ -536,12 +536,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_unalias.o",
-      "src/ts_unalias.c"
+      "obj/tshoo_unalias.o",
+      "src/tshoo_unalias.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_unalias.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_unalias.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_unalias.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_unalias.o"
   },
   {
     "arguments": [
@@ -552,12 +552,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/ts_unset.o",
-      "src/ts_unset.c"
+      "obj/tshoo_unset.o",
+      "src/tshoo_unset.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
-    "file": "/home/seetwoo/Documents/tshoo/src/ts_unset.c",
-    "output": "/home/seetwoo/Documents/tshoo/obj/ts_unset.o"
+    "file": "/home/seetwoo/Documents/tshoo/src/tshoo_unset.c",
+    "output": "/home/seetwoo/Documents/tshoo/obj/tshoo_unset.o"
   },
   {
     "arguments": [

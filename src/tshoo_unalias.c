@@ -25,7 +25,7 @@ static void	delete_all_aliases(t_env *env) {
 	env->aliases = NULL;
 }
 
-int	ts_unalias(t_node *node, t_env *env) {
+int	tshoo_unalias(t_node *node, t_env *env) {
 	if (!(node->command[1]))
 		return (dprintf(2, "%s%s\n", WARN_HD, UNAL_USAGE), 0);
 	if (strncmp(node->command[1], "-a", 2) == 0)

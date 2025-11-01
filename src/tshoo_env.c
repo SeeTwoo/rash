@@ -15,7 +15,7 @@
 #include "env.h"
 #include "nodes.h"
 
-int	ts_env(t_node *cmd, t_env *env) {
+int	tshoo_env(t_node *cmd, t_env *env) {
 	t_key_value	*list = env->env_list;
 
 	(void)cmd;

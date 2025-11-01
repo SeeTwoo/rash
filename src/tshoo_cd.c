@@ -51,7 +51,7 @@ char	*get_destination(t_node *node, t_key_value *list, int ac) {
 	return (destination);
 }
 
-int	ts_cd(t_node *node, t_env *env) {
+int	tshoo_cd(t_node *node, t_env *env) {
 	t_key_value	*old_pwd = kv_chr(env->env_list, "OLDPWD");
 	t_key_value	*pwd = kv_chr(env->env_list, "PWD");
 	char		*path;

@@ -23,7 +23,7 @@ char	**first_arg(char **command) {
 	return (&command[1]);
 }
 
-int	ts_echo(t_node *command, t_env *env) {
+int	tshoo_echo(t_node *command, t_env *env) {
 	char	**args;
 
 	(void)env;

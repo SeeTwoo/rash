@@ -39,7 +39,7 @@ static ssize_t	is_valid_alias(char *new_kv) {
 	return (key_len);
 }
 
-int	ts_alias(t_node *node, t_env *env) {
+int	tshoo_alias(t_node *node, t_env *env) {
 	ssize_t	key_len;
 
 	if (!node->command[1])

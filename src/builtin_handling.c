@@ -19,13 +19,13 @@
 int	expand_command(char **cmd, t_key_value *env);
 int	setup_redirections(t_node *node);
 int	trim_command(t_node *node);
-int	ts_alias(t_node *cmd, t_env *env);
-int	ts_cd(t_node *cmd, t_env *env);
-int	ts_env(t_node *cmd, t_env *env);
-int	ts_exit(t_node *cmd, t_env *env);
-int	ts_echo(t_node *cmd, t_env *env);
-int	ts_unalias(t_node *cmd, t_env *env);
-int	ts_unset(t_node *cmd, t_env *env);
+int	tshoo_alias(t_node *cmd, t_env *env);
+int	tshoo_cd(t_node *cmd, t_env *env);
+int	tshoo_env(t_node *cmd, t_env *env);
+int	tshoo_exit(t_node *cmd, t_env *env);
+int	tshoo_echo(t_node *cmd, t_env *env);
+int	tshoo_unalias(t_node *cmd, t_env *env);
+int	tshoo_unset(t_node *cmd, t_env *env);
 
 typedef int	(*t_builtin)(t_node *cmd, t_env *env);
 
@@ -33,19 +33,19 @@ t_builtin	is_builtin(char *name) {
 	if (!name)
 		return (NULL);
 	if (strcmp(name, "exit") == 0)
-		return (ts_exit);
+		return (tshoo_exit);
 	else if (strcmp(name, "echo") == 0)
-		return (ts_echo);
+		return (tshoo_echo);
 	else if (strcmp(name, "cd") == 0)
-		return (ts_cd);
+		return (tshoo_cd);
 	else if (strcmp(name, "alias") == 0)
-		return (ts_alias);
+		return (tshoo_alias);
 	else if (strcmp(name, "unalias") == 0)
-		return (ts_unalias);
+		return (tshoo_unalias);
 	else if (strcmp(name, "env") == 0)
-		return (ts_env);
+		return (tshoo_env);
 	else if (strcmp(name, "unset") == 0)
-		return (ts_unset);
+		return (tshoo_unset);
 	return (NULL);
 }
 
