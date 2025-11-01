@@ -31,13 +31,13 @@ SRC_FILES = aliasing.c \
 			syntax.c \
 			tok_to_args.c \
 			trim_command.c \
-			ts_alias.c \
-			ts_cd.c \
-			ts_echo.c \
-			ts_env.c \
-			ts_exit.c \
-			ts_unalias.c \
-			ts_unset.c \
+			tshoo_alias.c \
+			tshoo_cd.c \
+			tshoo_echo.c \
+			tshoo_env.c \
+			tshoo_exit.c \
+			tshoo_unalias.c \
+			tshoo_unset.c \
 			word_token.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
