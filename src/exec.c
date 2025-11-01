@@ -93,7 +93,7 @@ int	exec(t_node **nodes, t_env *env) {
 		else if (get_bin_path(nodes[i], get_kv_value(env->env_list, "PATH")) == 0)
 			exec_command(nodes[i], env, nodes);
 		else
-			dprintf(2, "%s%s : %s\n", ERR_HD, nodes[i]->command[0], CMD_FND);
+			dprintf(2, "%s%s : %s\n", MSTK_HD, nodes[i]->command[0], CMD_FND);
 	}
 	close_every_fd();
 	while (--command_number >= 0)

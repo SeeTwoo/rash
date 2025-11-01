@@ -46,14 +46,14 @@ int	tshoo_cd(t_node *node, t_env *env) {
 	int			ac = array_len(node->command);
 
 	if (ac > 2)
-		return (dprintf(2, "%s%s : %s\n", ERR_HD, "cd", TOO_MANY), 1);
+		return (dprintf(2, "%s%s : %s\n", WARN_HD, "cd", TOO_MANY), 1);
 	path = get_destination(node, env->env_list, ac);
 	if (!path)
 		return (1);
 	if (access(path, F_OK) != 0)
 		return (1);
 	if (chdir(path) == -1)
-		return (dprintf(2, "%s%s : %s\n", ERR_HD, node->command[1], strerror(errno)), 1);
+		return (dprintf(2, "%s%s : %s\n", WARN_HD, node->command[1], strerror(errno)), 1);
 	free(old_pwd->value);
 	old_pwd->value = pwd->value;
 	pwd->value = getcwd(NULL, 0);

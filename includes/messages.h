@@ -2,8 +2,9 @@
 # define MESSAGES_H
 
 //msg hd
-# define ERR_HD "\x1b[1;31m - tshoo - \x1b[0m"
-# define WARN_HD "\x1b[38;2;255;255;0m - tshoo - \x1b[0m"
+# define MSTK_HD "\x1b[38;2;255;255;0m - tshoo - \x1b[0m"
+# define WARN_HD "\x1b[38;2;255;255;0m - tshoo: warning - \x1b[0m"
+# define FATAL_HD "\x1b[38;2;255;0;0m - tshoo: fatal - \x1b[0m"
 
 //syntax warning
 # define UNCLOSED_PIPE "unclosed pipe"

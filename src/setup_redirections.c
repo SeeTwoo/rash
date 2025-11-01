@@ -26,9 +26,9 @@ static int	setup_in_redirs(t_redir *head) {
 		else if (head->type == HD)
 			infile_fd = heredoc(head->name);
 		if (infile_fd == -1)
-			return (dprintf(2, "%s%s : %s\n", ERR_HD, head->name, strerror(errno)), 1);
+			return (dprintf(2, "%s%s : %s\n", WARN_HD, head->name, strerror(errno)), 1);
 		if (dup2(infile_fd, STDIN_FILENO) == -1)
-			return (dprintf(2, "%s", strerror(errno)), 1);
+			return (dprintf(2, "%s%s\n", FATAL_HD, strerror(errno)), 2);
 		close(infile_fd);
 		head = head->next;
 	}
@@ -45,9 +45,9 @@ static int	setup_out_redirs(t_redir *head) {
 		flags = O_WRONLY | O_CREAT | head->type;
 		outfile_fd = open(head->name, flags, 0644);
 		if (outfile_fd == -1)
-			return (dprintf(2, "%s%s : %s\n", ERR_HD, head->name, strerror(errno)), 1);
+			return (dprintf(2, "%s%s : %s\n", WARN_HD, head->name, strerror(errno)), 1);
 		if (dup2(outfile_fd, STDOUT_FILENO) == -1)
-			return (dprintf(2, "%s", strerror(errno)), 1);
+			return (dprintf(2, "%s%s\n", FATAL_HD, strerror(errno)), 2);
 		close(outfile_fd);
 		head = head->next;
 	}

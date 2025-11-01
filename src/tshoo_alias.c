@@ -20,10 +20,10 @@ static ssize_t	is_valid_alias(char *new_kv) {
 	ssize_t	key_len;
 
 	if (!strchr(new_kv, '='))
-		return (dprintf(2, "%s%s\n", WARN_HD, NEED_EQUAL), -1);
+		return (dprintf(2, "%s%s\n", MSTK_HD, NEED_EQUAL), -1);
 	key_len = strcspn(new_kv, "=");
 	if (key_len == 0)
-		return (dprintf(2, "%s%s\n", WARN_HD, NEED_PATTERN), -1);
+		return (dprintf(2, "%s%s\n", MSTK_HD, NEED_PATTERN), -1);
 	return (key_len);
 }
 
