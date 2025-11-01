@@ -4,42 +4,48 @@
 #include <string.h>
 #include "nodes.h"
 
-static void	build_temp_path(char temp[4096], char *path, char *name) {
+static char	*build_temp_path(char *path, char *name) {
+	size_t	path_len = strlen(path);
+	size_t	name_len = strlen(name);
+	char	*temp = malloc(sizeof(char) * (path_len + name_len + 2));
+
+	if (!temp)
+		return (NULL);
 	strcpy(temp, path);
-	strcpy(&temp[strlen(path)], "/");
-	strcpy(&temp[strlen(path) + 1], name);
+	strcpy(temp + path_len, "/");
+	strcpy(temp + path_len + 1, name);
+	return (temp);
 }
 
-static int	find_command_full_path(char *paths, char *name, char temp[4096]) {
+static char	*find_command_full_path(char *paths, char *name) {
 	char	*path_dup = strdup(paths);
 	char	*tok;
+	char	*temp;
 
 	if (!path_dup)
-		return (1);
+		return (NULL);
 	tok = strtok(path_dup, ":");
 	while (tok) {
-		build_temp_path(temp, tok, name);
+		temp = build_temp_path(tok, name);
 		if (access(temp, X_OK) == 0) {
 			free(path_dup);
-			return (0);
+			return (temp);
 		}
+		free(temp);
 		tok = strtok(NULL, ":");
 	}
 	free(path_dup);
-	return (1);
+	return (NULL);
 }
 
 int	get_bin_path(t_node *node, char *path_variable) {
-	char	temp[4096];
 	char	*command_path;
 
 	if (!node || !path_variable || !(node->command) || !(node->command[0]))
 		return (1);
 	if (access(node->command[0], X_OK) == 0)
 		return (0);
-	if (find_command_full_path(path_variable, node->command[0], temp) == 1)
-		return (1);
-	command_path = strdup(temp);
+	command_path = find_command_full_path(path_variable, node->command[0]);
 	if (!command_path)
 		return (1);
 	free(node->command[0]);

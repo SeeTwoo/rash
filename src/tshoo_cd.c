@@ -55,7 +55,8 @@ int	tshoo_cd(t_node *node, t_env *env) {
 	if (chdir(path) == -1)
 		return (dprintf(2, "%s%s : %s\n", WARN_HD, node->command[1], strerror(errno)), 1);
 	free(old_pwd->value);
-	old_pwd->value = pwd->value;
+	old_pwd->value = strdup(pwd->value);
+	free(pwd->value);
 	pwd->value = getcwd(NULL, 0);
 	if (!(pwd->value))
 		dprintf(2, "%s%s", WARN_HD, BROKEN_ENV);
