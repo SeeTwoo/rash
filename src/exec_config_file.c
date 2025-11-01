@@ -11,20 +11,27 @@
 
 int		script_loop(t_env *env, char *path);
 
+#ifndef RC_FILE
+# define RC_FILE "/.tshoorc"
+#endif
+
 void	exec_config_file(t_env *env) {
-	char		config_path[4096];
-	char		*home;
+	char		*config_path;
+	char		*home = get_kv_value(env->env_list, "HOME");
 	size_t		home_len;
 
-	home = get_kv_value(env->env_list, "HOME");
 	if (!home) {
-		dprintf(2, "%s%s\n", WARN_HD, NO_HOME_VAR_RC);
+		dprintf(2, "%s%s, %s\n", WARN_HD, NO_HOME, NO_RC);
 		return ;
 	}
 	home_len = strlen(home);
-	memcpy(config_path, home, home_len);
-	config_path[home_len] = '/';
-	memcpy(&config_path[home_len + 1], ".tshoorc", 7);
-	config_path[home_len + 1 + 7] = '\0';
+	config_path = malloc(sizeof(char) * (home_len + strlen(RC_FILE) + 1));
+	if (!config_path) {
+		dprintf(2, "%s%s, %s\n", WARN_HD, ERR_MALLOC, NO_RC);
+		return ;
+	}
+	strcpy(config_path, home);
+	strcpy(config_path + home_len, RC_FILE);
 	script_loop(env, config_path);
+	free(config_path);
 }

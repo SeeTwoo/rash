@@ -37,6 +37,12 @@
 # define NO_ENV "malloc failed, environment may be missing or incomplete"
 
 //exec config file
-# define NO_HOME_VAR_RC "no HOME variable, tshoorc will not be run"
+# define NO_RC "tshoorc will not be run"
+
+//malloc
+#define ERR_MALLOC "malloc failed"
+
+//home not set
+#define NO_HOME "HOME variable not set"
 
 #endif
