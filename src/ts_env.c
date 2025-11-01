@@ -16,7 +16,7 @@
 #include "nodes.h"
 
 int	ts_env(t_node *cmd, t_env *env) {
-	t_kv_list	*list = env->env_list;
+	t_key_value	*list = env->env_list;
 
 	(void)cmd;
 	while (list) {

@@ -15,13 +15,13 @@
 #include <string.h>
 
 #include "env.h"
-#include "kv_list.h"
+#include "key_value.h"
 #include "messages.h"
 #include "nodes.h"
 
-void	modify_kv_list(t_kv_list **kv, char *new, ssize_t key_len);
+void	modify_kv_list(t_key_value **kv, char *new, ssize_t key_len);
 
-static void	display_aliases(t_kv_list *aliases) {
+static void	display_aliases(t_key_value *aliases) {
 	while (aliases) {
 		printf("%s=%s\n", get_key(aliases), get_value(aliases));
 		aliases = get_next(aliases);

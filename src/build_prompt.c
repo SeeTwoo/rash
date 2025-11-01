@@ -16,13 +16,13 @@
 
 #include "env.h"
 
-char	*get_kv_value(t_kv_list *list, char *key);
-
-static char	*get_wd(t_kv_list *env) {
+static char	*get_wd(t_key_value *env) {
 	char	*last_slash;
 	char	*wd;
 
 	wd = get_kv_value(env, "PWD");
+	if (!wd)
+		return (NULL);
 	last_slash = wd;
 	while (*wd) {
 		if (*wd == '/')
@@ -59,6 +59,8 @@ static void fill_prompt(char *prompt, char *format, t_env *env) {
  		} else {
 			format++;
 			bit = get_bit(format, env);
+			if (!bit)
+				continue ;
 			bit_len = strlen(bit);
 			memcpy(&prompt[total_len], bit, bit_len);
 			total_len += bit_len;
@@ -84,7 +86,7 @@ void	escaping(char *ps1) {
 
 void	build_prompt(char *prompt, char *format, t_env *env) {
 	if (!format) {
-		fill_prompt(prompt, "\x1b[32m rash> \x1b[0m", env);
+		fill_prompt(prompt, "\x1b[36m > \x1b[0m", env);
 		return ;
 	}
 	char	*ps1_dup = strdup(format);

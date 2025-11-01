@@ -136,8 +136,8 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/exec_script.o",
-      "src/exec_script.c"
+      "obj/expansion.o",
+      "src/expansion.c"
     ],
     "directory": "/home/seetwoo/Documents/tshoo",
     "file": "/home/seetwoo/Documents/tshoo/src/expansion.c",

@@ -28,7 +28,7 @@
 //alias messages
 # define NEED_EQUAL "need a '=' to create an alias : <pattern>=<replace>"
 # define NEED_PATTERN "need a pattern to search : <pattern>=<replace>"
-# define NEED_REPLACE "need a string to replace with : <pattern>=<replace>"
+# define NOT_ALIASED "malloc failed, an alias was not applied"
 
 //unalias messages
 # define UNAL_USAGE "usage : unalias <pattern> ... OR unalias -a"
@@ -39,8 +39,16 @@
 //cd 
 # define BROKEN_ENV "malloc failed, the environment is now missing variables and may behave weirdly"
 # define TOO_MANY "too many arguments"
+# define HOME_NOT_SET "HOME not set"
+# define OLDPWD_NOT_SET "OLDPWD not set"
 
 //expansion
 # define EXP_FAILED_MALLOC "malloc failed, a variable was not expanded"
+
+//init env
+# define NO_ENV "malloc failed, environment may be missing or incomplete"
+
+//exec config file
+# define NO_HOME_VAR_RC "no HOME variable, rashrc will not be run"
 
 #endif

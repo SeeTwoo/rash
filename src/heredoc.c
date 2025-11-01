@@ -15,7 +15,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "ts_readline.h"
+#include "tshoo_line.h"
 
 int	heredoc(char *limiter) {
 	int		fds[2];
@@ -24,7 +24,7 @@ int	heredoc(char *limiter) {
 	pipe(fds);
 	do {
 		free(line);
-		line = ts_readline("> ", NULL);
+		line = tshoo_line("> ", NULL);
 		if (!line)
 			return (fds[0]);
 		dprintf(fds[1], "%s", line);

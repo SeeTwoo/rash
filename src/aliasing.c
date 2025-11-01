@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "env.h"
+#include "messages.h"
 
 static size_t	skip_whitespaces(char *line) {
 	size_t	i;
@@ -37,58 +38,48 @@ static size_t	skip_to_next_command_block(char *line) {
 	return (i);
 }
 
-static char	*search_key(char *line, t_kv_list *aliases) {
-	while (aliases && strncmp(line, aliases->key, strlen(aliases->key)) != 0)
-		aliases = aliases->next;
-	if (!aliases)
-		return (NULL);
-	return (aliases->value);
-}
-
-static char *replace_cmd_with_alias(char *old_line, char *alias, size_t cmd_position) {
-	size_t	cmd_len;
+static char *replace(char *old_line, char *current, char *alias, size_t key_len) {
+	char	*line;
 	size_t	alias_len;
-	char	*new_line;
-	char	*alias_dest;
-	char	*line_end_dest;
-	char	*old_line_end;
+	size_t	first_half_len;
+	char	*last_half;
 
-	cmd_len = strcspn(&old_line[cmd_position], " \t\r|");
 	alias_len = strlen(alias);
-	new_line = malloc(sizeof(char) * (strlen(old_line) - cmd_len + alias_len + 1));
-	if (!new_line) {
-		dprintf(2, "ts: Warning: an alias was not applied, malloc failed\n");
+	line = malloc(sizeof(char) * (strlen(old_line) - key_len + alias_len + 1));
+	if (!line) {
+		dprintf(2, "%s%s\n", WARN_HD, NOT_ALIASED);
 		return (old_line);
 	}
-	alias_dest = &new_line[cmd_position];
-	line_end_dest = &new_line[cmd_position + alias_len];
-	old_line_end = &old_line[cmd_position + cmd_len];
-	memcpy(new_line, old_line, cmd_position);
-	memcpy(alias_dest, alias, alias_len);
-	memcpy(line_end_dest, old_line_end, strlen(old_line_end) + 1);
+	first_half_len = current - old_line;
+	last_half = (char*)(current + key_len);
+	memcpy(line, old_line, first_half_len);
+	memcpy(line + first_half_len, alias, alias_len);
+	memcpy(line + first_half_len + alias_len, last_half, strlen(last_half) + 1);
 	free(old_line);
-	return (new_line);
+	return (line);
 }
 
-static char	*search_and_replace_pattern(char *line, size_t cmd_position, t_kv_list *aliases) {
+static char	*search_and_replace(char *line, char *current, t_key_value *aliases) {
 	char	*alias;
+	size_t	key_len;
 
-	alias = search_key(&line[cmd_position], aliases);
+	key_len = strcspn(current, " \r\t\n<>|");
+	alias = get_kv_n_value(aliases, current, key_len);
 	if (!alias)
 		return (line);
-	return (replace_cmd_with_alias(line, alias, cmd_position));
+	return (replace(line, current, alias, key_len));
 }
 
-char	*aliasing(char *line, t_kv_list *aliases) {
-	size_t		cmd_position;
+char	*aliasing(char *line, t_key_value *aliases) {
+	size_t	current;
 
 	if (!aliases)
 		return (line);
-	cmd_position = 0;
-	while (line[cmd_position]) {
-		cmd_position += skip_whitespaces(&line[cmd_position]);
-		line = search_and_replace_pattern(line, cmd_position, aliases);
-		cmd_position += skip_to_next_command_block(&line[cmd_position]);
+	current = 0;
+	while (*(line + current)) {
+		current += skip_whitespaces(line + current);
+		line = search_and_replace(line, (char *)(line + current), aliases);
+		current += skip_to_next_command_block(line + current);
 	}
 	return (line);
 }

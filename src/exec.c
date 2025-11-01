@@ -25,14 +25,14 @@ typedef int	(*t_builtin)(t_node *cmd, t_env *env);
 
 void		assign_variable(t_env *env, char *new);
 void		close_every_fd(void);
-char		**list_to_env(t_kv_list *env);
+char		**list_to_env(t_key_value *env);
 void		exec_builtin(t_builtin func, t_node *node, t_env *env);
-int			expand_command(char **cmd, t_kv_list *env);
+int			expand_command(char **cmd, t_key_value *env);
 void		free_double_array(char **array);
-void		free_kv_list(t_kv_list*);
+void		free_kv_list(t_key_value*);
 void		free_node_array(t_node **nodes);
 int			get_bin_path(t_node *node, char *path);
-char		*get_kv_value(t_kv_list *list, char *key);
+char		*get_kv_value(t_key_value *list, char *key);
 t_builtin	is_builtin(char *name);
 void		print_nodes(t_node **nodes);
 int			setup_redirections(t_node *command);
@@ -56,7 +56,7 @@ static int	get_pipes(t_node **nodes, int command_number) {
 
 static void	clean_child_process(t_node **nodes, t_env *env) {
 	free_node_array(nodes);
-	ts_free_hist(env->history);
+	tshoo_free_hist(env->history);
 	free_kv_list(env->aliases);
 	free_kv_list(env->env_list);
 	close_every_fd();

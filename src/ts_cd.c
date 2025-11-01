@@ -52,21 +52,18 @@ char	*get_destination(t_node *node, t_key_value *list, int ac) {
 }
 
 int	ts_cd(t_node *node, t_env *env) {
-	t_kv_list	*old_pwd = kv_chr(env->env_list, "OLDPWD");
-	t_kv_list	*pwd = kv_chr(env->env_list, "PWD");
+	t_key_value	*old_pwd = kv_chr(env->env_list, "OLDPWD");
+	t_key_value	*pwd = kv_chr(env->env_list, "PWD");
 	char		*path;
-	int			len = 0;
+	int			ac = array_len(node->command);
 
-	while (node->command[len])
-		len++;
-	if (len > 2)
+	if (ac > 2)
 		return (dprintf(2, "%s%s : %s\n", ERR_HD, "cd", TOO_MANY), 1);
-	if (len == 1)
-		path = get_kv_value(env->env_list, "HOME");
-	else if (len == 2 && strcmp("-", node->command[1]) == 0)
-		path = old_pwd->value;
-	else if (len == 2)
-		path = node->command[1];
+	path = get_destination(node, env->env_list, ac);
+	if (!path)
+		return (1);
+	if (access(path, F_OK) != 0)
+		return (1);
 	if (chdir(path) == -1)
 		return (dprintf(2, "%s%s : %s\n", ERR_HD, node->command[1], strerror(errno)), 1);
 	free(old_pwd->value);

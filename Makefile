@@ -1,5 +1,5 @@
-NAME = train_shell 
-CC = cc -Wall -Wextra -Werror -Iincludes -Its_readline/includes
+NAME = tshoo 
+CC = cc -Wall -Wextra -Werror -Iincludes
 CCDEBUG = $(CC) -g3 -O0
 
 SRC_DIR = src
@@ -11,20 +11,17 @@ SRC_FILES = aliasing.c \
 			environment_manipulation.c \
 			exec.c \
 			exec_config_file.c \
-			exec_script.c \
 			expansion.c \
 			get_bin_path.c \
 			get_next_line.c \
-			get_paths.c \
 			get_redirections.c \
 			heredoc.c \
 			init_env.c \
 			is_token_type.c \
-			kv_list.c \
 			lexer.c \
 			list_to_array.c \
+			loops.c \
 			main.c \
-			main_loop.c \
 			parser.c \
 			parsing.c \
 			print_nodes.c \
