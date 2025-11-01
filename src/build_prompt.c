@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                         :::     ::::::::   */
-/*   build_prompt.c                                      :+:     :+:    :+:   */
-/*                                                     +:+ +:+        +:+     */
-/*   By: SeeTwoo <waltibee@gmail.com>                +#+  +:+       +#+       */
-/*                                                 +#+#+#+#+#+   +#+          */
-/*   Created:                                           #+#    #+#            */
-/*   Uptated:                                          ###   ########.fr      */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,7 +34,7 @@ static void fill_prompt(char *prompt, char *format, t_env *env) {
 	char	*bit;
 
 	if (!format) {
-		strcpy(prompt, "rash> ");
+		strcpy(prompt, "tshoo> ");
 		return ;
 	}
 	total_len = 0;

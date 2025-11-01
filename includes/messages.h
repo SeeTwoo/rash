@@ -1,21 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                         :::     ::::::::   */
-/*   messages.h                                          :+:     :+:    :+:   */
-/*                                                     +:+ +:+        +:+     */
-/*   By: walter </var/spool/mail/walter>             +#+  +:+       +#+       */
-/*                                                 +#+#+#+#+#+   +#+          */
-/*   Created:                                           #+#    #+#            */
-/*   Uptated:                                          ###   ########.fr      */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MESSAGES_H
 # define MESSAGES_H
 
 //msg hd
-# define ERR_HD "\x1b[1;31m - rash - \x1b[0m"
-# define WARN_HD "\x1b[38;2;255;255;0m - rash - \x1b[0m"
+# define ERR_HD "\x1b[1;31m - tshoo - \x1b[0m"
+# define WARN_HD "\x1b[38;2;255;255;0m - tshoo - \x1b[0m"
 
 //syntax warning
 # define UNCLOSED_PIPE "unclosed pipe"
@@ -49,6 +37,6 @@
 # define NO_ENV "malloc failed, environment may be missing or incomplete"
 
 //exec config file
-# define NO_HOME_VAR_RC "no HOME variable, rashrc will not be run"
+# define NO_HOME_VAR_RC "no HOME variable, tshoorc will not be run"
 
 #endif
